@@ -1,15 +1,22 @@
 const app = getApp()
 const api = require('../../utils/api')
 
-// 状态映射
+// 兜底状态映射(只用在 pending/cancelled/refunded 等非陈酿态)
 const STATUS_MAP = {
   pending:   { code: 'sleeping', text: '待支付' },
-  paid:      { code: 'active',   text: '入窖准备中' },
-  aging:     { code: 'sleeping', text: '安心沉睡中' },
-  ready:     { code: 'ready',    text: '待开启' },
-  completed: { code: 'ready',    text: '已开坛' },
   cancelled: { code: 'sleeping', text: '已取消' },
   refunded:  { code: 'sleeping', text: '已退款' }
+}
+
+// 按陈酿天数推断业务状态:支付完进入"入窖准备中",再演进
+function deriveAgingStatus(days, rawStatus) {
+  if (rawStatus === 'completed') return { code: 'ready', text: '已开坛' }
+  if (days < 7)   return { code: 'active',   text: '入窖准备中' }
+  if (days < 30)  return { code: 'active',   text: '初醒发酵中' }
+  if (days < 90)  return { code: 'active',   text: '活跃发酵中' }
+  if (days < 180) return { code: 'sleeping', text: '风味沉淀中' }
+  if (days < 365) return { code: 'sleeping', text: '安心沉睡中' }
+  return { code: 'ready', text: '待开启' }
 }
 
 Page({
@@ -59,13 +66,15 @@ Page({
 
       const list = await api.claimList()
       const claims = (Array.isArray(list) ? list : []).map(c => {
-        const stm = STATUS_MAP[c.status] || { code: 'sleeping', text: c.status || '处理中' }
+        const days = this.calcDays(c.paid_at || c.created_at)
+        // pending/cancelled/refunded 走兜底,其他按陈酿天数推断
+        const stm = STATUS_MAP[c.status] || deriveAgingStatus(days, c.status)
         return {
           id: c.id,
           code: this.codeFromJar(c.jar_id),
           series: '十摊系列',
           cellar: this.cellarFromId(c.cellar_id),
-          aging_days: this.calcDays(c.paid_at || c.created_at),
+          aging_days: days,
           status: stm.code,
           status_text: stm.text,
           is_default: defaultClaimId === c.id
