@@ -7,6 +7,7 @@ Page({
     jarId: '1',
     code: '',
     series: '',
+    cellar: '四坪窖藏',
     price: 1299,
     channel: 'wechat',
     paying: false
@@ -14,12 +15,13 @@ Page({
 
   onLoad(options) {
     this.setData({ statusBarHeight: app.globalData.statusBarHeight || 20 })
-    const { jarId = '1', price = '1299', code = '', series = '' } = options || {}
+    const { jarId = '1', price = '1299', code = '', series = '', cellar = '' } = options || {}
     this.setData({
       jarId,
       price: Number(price) || 1299,
       code: code || 'BQ-0827',
-      series: decodeURIComponent(series || '十摊7春分系列')
+      series: decodeURIComponent(series || '十摊7春分系列'),
+      cellar: decodeURIComponent(cellar || '四坪窖藏')
     })
   },
 

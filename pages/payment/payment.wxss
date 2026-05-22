@@ -21,83 +21,81 @@
 .nav-title {
   flex: 1;
   text-align: center;
-  font-size: 32rpx;
-  color: #2A2A2A;
+  font-size: 34rpx;
+  color: #8C2424;
   font-weight: 600;
+  letter-spacing: 2rpx;
 }
 .nav-placeholder { width: 60rpx; }
 
-/* 金额大卡 */
+/* ============ 金额 + 藏品信息合一卡 ============ */
 .amount-card {
-  margin: 30rpx;
-  padding: 40rpx 36rpx;
-  border-radius: 24rpx;
-  background: linear-gradient(135deg, #C73838 0%, #8C2424 60%, #6A1818 100%);
-  box-shadow: 0 10rpx 28rpx rgba(140,36,36,0.3);
-  color: #fff;
   position: relative;
+  margin: 24rpx 30rpx 36rpx;
+  padding: 36rpx 30rpx 30rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(180deg, #F4E6CB 0%, #EAD4A4 100%);
+  box-shadow: 0 6rpx 20rpx rgba(140,100,40,0.12);
   overflow: hidden;
 }
-.amount-card::before {
-  content: '';
+.amount-decor {
   position: absolute;
-  top: -60rpx;
-  right: -60rpx;
-  width: 280rpx;
-  height: 280rpx;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
+  top: 12rpx;
+  right: 28rpx;
+  font-size: 130rpx;
+  color: rgba(0,0,0,0.06);
+  pointer-events: none;
+  line-height: 1;
 }
-.amount-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.amount-section {
+  text-align: center;
   position: relative;
+  z-index: 2;
 }
 .amount-label {
-  font-size: 26rpx;
-  color: rgba(255,255,255,0.85);
-  letter-spacing: 2rpx;
+  font-size: 24rpx;
+  color: #6B5A4A;
+  letter-spacing: 1rpx;
 }
 .amount-num {
-  margin-top: 16rpx;
+  margin-top: 14rpx;
   display: flex;
   align-items: baseline;
+  justify-content: center;
+  color: #8C2424;
+  font-weight: 700;
 }
 .yen {
-  font-size: 36rpx;
-  margin-right: 6rpx;
+  font-size: 40rpx;
+  margin-right: 4rpx;
 }
 .num {
   font-size: 80rpx;
-  font-weight: 700;
   letter-spacing: 1rpx;
+  line-height: 1;
 }
 .dec {
-  font-size: 32rpx;
-  margin-left: 4rpx;
-}
-.amount-icon {
-  font-size: 88rpx;
-  filter: drop-shadow(0 4rpx 8rpx rgba(0,0,0,0.2));
+  font-size: 36rpx;
 }
 
-/* 信息卡 */
-.info-card {
-  margin: 0 30rpx 30rpx;
-  padding: 24rpx 28rpx;
-  background: #fff;
-  border-radius: 16rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+.divider {
+  height: 1rpx;
+  background: rgba(0,0,0,0.08);
+  margin: 28rpx 0 24rpx;
+  border-top: 1rpx dashed rgba(0,0,0,0.05);
+}
+
+.info-rows {
+  position: relative;
+  z-index: 2;
 }
 .info-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16rpx 0;
-  border-bottom: 1rpx dashed rgba(160,40,40,0.12);
+  padding: 10rpx 0;
 }
-.info-row:last-child { border-bottom: none; }
 .info-label {
   font-size: 26rpx;
   color: #6B5A4A;
@@ -105,128 +103,124 @@
 .info-value {
   font-size: 28rpx;
   color: #2A2A2A;
-  font-weight: 600;
-}
-.info-value.sub {
-  font-size: 24rpx;
-  color: #8B7A5A;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-/* section title */
+/* ============ 选择支付方式 ============ */
 .section-head {
   display: flex;
   align-items: center;
-  margin: 0 30rpx 18rpx;
-  font-size: 28rpx;
+  margin: 0 30rpx 24rpx;
+  font-size: 30rpx;
   font-weight: 600;
   color: #2A2A2A;
 }
 .bar {
   width: 6rpx;
-  height: 26rpx;
+  height: 28rpx;
   background: #A02828;
   margin-right: 12rpx;
 }
 
-/* 支付方式 */
 .channel-list {
-  margin: 0 30rpx 40rpx;
+  margin: 0 30rpx;
 }
 .channel {
   display: flex;
   align-items: center;
-  padding: 26rpx 28rpx;
+  padding: 24rpx 26rpx;
   background: #fff;
   border-radius: 16rpx;
-  margin-bottom: 16rpx;
+  margin-bottom: 18rpx;
   border: 2rpx solid transparent;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
 }
 .channel.on {
   border-color: #A02828;
   background: #FFF8F0;
+  box-shadow: 0 4rpx 14rpx rgba(140,36,36,0.1);
 }
+
 .ch-icon {
   width: 64rpx;
   height: 64rpx;
-  border-radius: 16rpx;
+  border-radius: 14rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40rpx;
   margin-right: 20rpx;
 }
 .ch-icon.wechat {
-  background: rgba(60,180,60,0.12);
+  background: rgba(60,180,60,0.15);
 }
 .ch-icon.alipay {
-  background: rgba(40,120,210,0.12);
+  background: rgba(40,120,210,0.15);
+}
+.ch-icon-symbol {
+  font-size: 36rpx;
+}
+
+.ch-text {
+  flex: 1;
 }
 .ch-name {
-  flex: 1;
   font-size: 30rpx;
-  font-weight: 500;
+  font-weight: 600;
   color: #2A2A2A;
+  margin-bottom: 6rpx;
 }
-.ch-radio {
-  width: 36rpx;
-  height: 36rpx;
+.ch-sub {
+  font-size: 22rpx;
+  color: #8B7A5A;
+  letter-spacing: 0.5rpx;
+}
+
+.ch-check {
+  width: 40rpx;
+  height: 40rpx;
   border: 2rpx solid #C4B59A;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.channel.on .ch-radio {
+.ch-check.on {
   border-color: #A02828;
-}
-.dot {
-  width: 18rpx;
-  height: 18rpx;
-  border-radius: 50%;
   background: #A02828;
 }
+.check-mark {
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 1;
+}
 
-/* 装饰 */
+/* ============ 装饰图 ============ */
 .deco {
-  margin: 30rpx;
-  padding: 30rpx;
-  background: linear-gradient(135deg, #FAF1DC, #EFE2C0);
-  border-radius: 16rpx;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 50rpx 30rpx;
 }
-.deco-jar {
-  font-size: 100rpx;
-  filter: drop-shadow(0 4rpx 12rpx rgba(140,36,36,0.2));
-  animation: bob 3s ease-in-out infinite;
-}
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6rpx); }
-}
-.deco-text {
-  margin-top: 12rpx;
-  font-size: 24rpx;
-  color: #8B7A5A;
-  letter-spacing: 4rpx;
+.deco-img {
+  width: 420rpx;
+  height: 360rpx;
+  opacity: 0.85;
 }
 
-/* 立即支付 */
+/* ============ 立即支付 ============ */
 .pay-btn-wrap {
   margin: 30rpx;
-  padding-top: 20rpx;
 }
 .pay-btn {
   width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
+  height: 96rpx;
+  line-height: 96rpx;
   background: #A02828;
   color: #fff;
   border-radius: 50rpx;
   font-size: 32rpx;
-  font-weight: 500;
-  letter-spacing: 2rpx;
+  font-weight: 600;
+  letter-spacing: 4rpx;
   box-shadow: 0 8rpx 24rpx rgba(140,36,36,0.3);
 }
 .pay-btn::after { border: none; }
@@ -235,9 +229,20 @@
   background: #C4B59A;
   color: #fff;
 }
+
 .pay-tip {
-  margin-top: 20rpx;
-  text-align: center;
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 22rpx;
   color: #8B7A5A;
+}
+.shield {
+  margin-right: 8rpx;
+  font-size: 24rpx;
+  color: #8B7A5A;
+}
+.tip-text {
+  letter-spacing: 1rpx;
 }

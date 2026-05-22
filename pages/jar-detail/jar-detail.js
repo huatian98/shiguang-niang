@@ -85,7 +85,7 @@ Page({
 
   onConfirmClaim() {
     wx.navigateTo({
-      url: `/pages/payment/payment?jarId=${this.data.jarId}&price=${this.data.price}&code=${this.data.code}&series=${encodeURIComponent(this.data.series)}`
+      url: `/pages/payment/payment?jarId=${this.data.jarId}&price=${this.data.price}&code=${this.data.code}&series=${encodeURIComponent(this.data.series)}&cellar=${encodeURIComponent(this.data.cellar)}`
     })
   },
 
