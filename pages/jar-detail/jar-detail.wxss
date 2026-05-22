@@ -1,1 +1,221 @@
-.page { padding: 200rpx 30rpx; text-align: center; color: #888; }
+.detail-page {
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 30rpx;
+  background: #F5F1E8;
+}
+.nav-close {
+  font-size: 40rpx;
+  color: #A02828;
+  width: 60rpx;
+}
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 34rpx;
+  color: #A02828;
+  font-weight: 500;
+  letter-spacing: 4rpx;
+}
+.nav-placeholder { width: 60rpx; }
+
+/* CSS 绘制酒坛 */
+.jar-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30rpx;
+  height: 480rpx;
+  justify-content: center;
+}
+.jar-bg {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  background: radial-gradient(ellipse at center 40%, rgba(160,40,40,0.06) 0%, transparent 70%);
+}
+.jar-shape {
+  position: relative;
+  width: 320rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.jar-neck {
+  width: 130rpx;
+  height: 60rpx;
+  background: linear-gradient(180deg, #6B3A1A, #4A2810);
+  border-radius: 14rpx 14rpx 4rpx 4rpx;
+  box-shadow: inset 0 -6rpx 10rpx rgba(0,0,0,0.35);
+  position: relative;
+  z-index: 2;
+}
+.jar-tag {
+  position: absolute;
+  top: -28rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFE6B0;
+  color: #8C2424;
+  font-size: 20rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 14rpx;
+  white-space: nowrap;
+  box-shadow: 0 2rpx 6rpx rgba(140,36,36,0.2);
+}
+.jar-body {
+  position: relative;
+  width: 320rpx;
+  height: 360rpx;
+  margin-top: -6rpx;
+  background:
+    linear-gradient(135deg, #9B5028 0%, #6E3818 50%, #3D1E08 100%);
+  border-radius: 50% 50% 35% 35% / 32% 32% 42% 42%;
+  box-shadow:
+    inset -28rpx -16rpx 40rpx rgba(0,0,0,0.45),
+    inset 24rpx 16rpx 40rpx rgba(255,180,100,0.16),
+    0 14rpx 32rpx rgba(80,40,10,0.4);
+}
+.jar-shine {
+  position: absolute;
+  top: 30rpx;
+  left: 50rpx;
+  width: 50rpx;
+  height: 120rpx;
+  background: linear-gradient(180deg, rgba(255,220,180,0.45), transparent);
+  border-radius: 50%;
+  filter: blur(8rpx);
+}
+.jar-shadow {
+  width: 240rpx;
+  height: 30rpx;
+  margin-top: -16rpx;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.breathing-tag {
+  position: absolute;
+  top: 40rpx;
+  right: 60rpx;
+  background: rgba(160,40,40,0.92);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 24rpx;
+  letter-spacing: 1rpx;
+}
+
+.code {
+  text-align: center;
+  font-size: 60rpx;
+  font-weight: 700;
+  color: #8C2424;
+  margin-top: 30rpx;
+  letter-spacing: 2rpx;
+}
+.series {
+  text-align: center;
+  font-size: 28rpx;
+  color: #6B5A4A;
+  margin-top: 12rpx;
+  margin-bottom: 40rpx;
+}
+
+.card {
+  position: relative;
+  margin: 0 30rpx;
+  padding: 36rpx 32rpx 30rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, #F0E5C7, #DCD3B5 60%, #B8AC85);
+  box-shadow: 0 6rpx 18rpx rgba(140,100,40,0.1);
+  overflow: hidden;
+}
+.watermark {
+  position: absolute;
+  top: 60rpx;
+  right: 40rpx;
+  font-size: 50rpx;
+  color: rgba(160,40,40,0.08);
+  letter-spacing: 10rpx;
+  font-weight: 500;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2A2A2A;
+  margin-bottom: 24rpx;
+}
+.bar {
+  width: 6rpx;
+  height: 28rpx;
+  background: #A02828;
+  margin-right: 14rpx;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16rpx 0;
+  border-bottom: 1rpx dashed rgba(140,36,36,0.1);
+}
+.row:last-child { border-bottom: none; }
+.label {
+  color: #6B5A4A;
+  font-size: 26rpx;
+}
+.value {
+  color: #2A2A2A;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: right;
+}
+.value-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.sub {
+  color: #8B7A5A;
+  font-size: 22rpx;
+  margin-top: 6rpx;
+}
+.price {
+  color: #8C2424;
+  font-size: 32rpx;
+}
+
+.btns {
+  margin-top: 50rpx;
+  padding: 0 30rpx;
+}
+.btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  margin-bottom: 24rpx;
+}
+.btn::after { border: none; }
+.btn.primary {
+  background: #A02828;
+  color: #fff;
+  box-shadow: 0 6rpx 16rpx rgba(140,36,36,0.25);
+}
+.btn.primary:active { transform: scale(0.98); }
+.btn.outline {
+  background: transparent;
+  border: 2rpx solid #A02828;
+  color: #A02828;
+}
