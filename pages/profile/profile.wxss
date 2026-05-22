@@ -1,1 +1,81 @@
-.page { padding: 200rpx 30rpx; text-align: center; color: #888; }
+.profile-page {
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin: 30rpx;
+  padding: 36rpx;
+  background: linear-gradient(135deg, #F0E5C7, #DCD3B5);
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(140,100,40,0.08);
+}
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70rpx;
+  margin-right: 24rpx;
+}
+.user-info {
+  flex: 1;
+}
+.nickname {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #2A2A2A;
+}
+.user-tag {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  background: #A02828;
+  color: #fff;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+.card {
+  margin: 0 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.card-row {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 30rpx;
+  border-bottom: 1rpx solid rgba(0,0,0,0.04);
+}
+.card-row:last-child { border-bottom: none; }
+.card-row:active { background: #FAF5E8; }
+.row-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  width: 50rpx;
+}
+.row-label {
+  flex: 1;
+  font-size: 28rpx;
+  color: #2A2A2A;
+}
+.row-arrow {
+  color: #C4B59A;
+  font-size: 32rpx;
+}
+
+.version {
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #B5A480;
+  letter-spacing: 2rpx;
+}
