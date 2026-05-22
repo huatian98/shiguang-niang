@@ -1,0 +1,11 @@
+# 微信开发者工具产物
+miniprogram_npm/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# 私有配置(包含本地工具设置,不应入仓)
+project.private.config.json

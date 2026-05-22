@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/claim/claim"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#F5F1E8",
+    "navigationBarBackgroundColor": "#F5F1E8",
+    "navigationBarTitleText": "时光酿",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

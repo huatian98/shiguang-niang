@@ -1,0 +1,83 @@
+<view class="page">
+  <view class="navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-close" bindtap="onClose">✕</view>
+    <view class="nav-title">时光酿</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <!-- 酒坛 + 编号 -->
+  <view class="jar-wrap">
+    <view class="jar-shape">
+      <view class="jar-neck"></view>
+      <view class="jar-body">
+        <text class="jar-label">時光酿</text>
+      </view>
+    </view>
+    <view class="breathing-tag">{{breathingState}}</view>
+  </view>
+
+  <view class="code">{{code}}</view>
+  <view class="series">{{series}} · {{cellar}}</view>
+
+  <!-- 酒坛切换 -->
+  <view class="switcher">
+    <view class="chip {{jarId == 1 ? 'active' : ''}}" data-id="1" bindtap="onSwitchJar">坛 1</view>
+    <view class="chip {{jarId == 2 ? 'active' : ''}}" data-id="2" bindtap="onSwitchJar">坛 2</view>
+    <view class="chip {{jarId == 3 ? 'active' : ''}}" data-id="3" bindtap="onSwitchJar">坛 3</view>
+  </view>
+
+  <!-- 实时指标卡片 -->
+  <view class="card">
+    <view class="watermark">时 光 凝 香</view>
+
+    <view class="card-header">
+      <view class="bar"></view>
+      <text>实时酒坛</text>
+      <text class="recorded" wx:if="{{recordedAt}}">{{recordedAt}}</text>
+    </view>
+
+    <!-- 酸碱度大数显示 -->
+    <view class="ph-block">
+      <view class="ph-label">黄酒酸碱度</view>
+      <view class="ph-value">
+        <text class="ph-num">{{winePh}}</text>
+        <text class="ph-status {{phStatus === '偏高' ? 'warn' : ''}}">{{phStatus}}</text>
+      </view>
+    </view>
+
+    <!-- 4 个指标方格 -->
+    <view class="metrics-grid">
+      <view class="metric-cell">
+        <view class="metric-label">窖内温度</view>
+        <view class="metric-num">{{inCellarTemp}}<text class="unit">°C</text></view>
+      </view>
+      <view class="metric-cell">
+        <view class="metric-label">窖内湿度</view>
+        <view class="metric-num">{{inCellarHumidity}}<text class="unit">%</text></view>
+      </view>
+      <view class="metric-cell">
+        <view class="metric-label">窖外温度</view>
+        <view class="metric-num">{{outCellarTemp}}<text class="unit">°C</text></view>
+      </view>
+      <view class="metric-cell">
+        <view class="metric-label">窖外湿度</view>
+        <view class="metric-num">{{outCellarHumidity}}<text class="unit">%</text></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI 醒酒师 -->
+  <view class="ai-card" wx:if="{{aiNarrative}}">
+    <view class="ai-icon">🍶</view>
+    <view class="ai-content">
+      <view class="ai-title">AI 醒酒师</view>
+      <view class="ai-text">{{aiNarrative}}</view>
+    </view>
+  </view>
+
+  <!-- 按钮 -->
+  <view class="btns">
+    <button class="btn primary" bindtap="onConfirm">确定认领</button>
+    <button class="btn outline" bindtap="onBack">返回首页</button>
+  </view>
+</view>
