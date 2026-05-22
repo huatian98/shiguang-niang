@@ -1,7 +1,5 @@
 {
-  "navigationBarTitleText": "时光酿",
-  "navigationBarBackgroundColor": "#F5F1E8",
-  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
   "backgroundColor": "#F5F1E8",
   "usingComponents": {}
 }

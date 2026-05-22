@@ -1,4 +1,4 @@
-<view class="placeholder-page">
+<view class="placeholder-page" style="padding-top: {{statusBarHeight}}px;">
   <view class="ph-icon">🎉</view>
   <view class="ph-title">活动</view>
   <view class="ph-sub">敬请期待</view>

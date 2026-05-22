@@ -1,4 +1,7 @@
-<view class="list-page">
+<view class="list-page" style="padding-top: {{statusBarHeight}}px;">
+  <view class="page-nav">
+    <text class="page-nav-title">时光酿</text>
+  </view>
   <view class="header">
     <view class="title-row">
       <text class="title">认领列表</text>

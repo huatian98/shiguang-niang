@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+.page-nav {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30rpx;
+}
+.page-nav-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #A02828;
+  letter-spacing: 6rpx;
+}
+
 /* ============ 状态 A:未认领 ============ */
 .hero-a {
   position: relative;

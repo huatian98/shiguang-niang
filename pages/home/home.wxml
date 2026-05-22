@@ -1,4 +1,8 @@
-<view class="home-page">
+<view class="home-page" style="padding-top: {{statusBarHeight}}px;">
+
+  <view class="page-nav">
+    <text class="page-nav-title">时光酿</text>
+  </view>
 
   <!-- ============ 状态 A:未认领 ============ -->
   <block wx:if="{{state === 'not_claimed'}}">

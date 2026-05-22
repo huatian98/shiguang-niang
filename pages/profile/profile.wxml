@@ -1,4 +1,7 @@
-<view class="profile-page">
+<view class="profile-page" style="padding-top: {{statusBarHeight}}px;">
+  <view class="page-nav">
+    <text class="page-nav-title">我的</text>
+  </view>
   <view class="header">
     <view class="avatar">🍶</view>
     <view class="user-info">

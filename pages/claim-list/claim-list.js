@@ -14,6 +14,7 @@ const STATUS_MAP = {
 
 Page({
   data: {
+    statusBarHeight: 20,
     claims: [],
     totalCount: 0,
     showNoticeBar: true,
@@ -22,6 +23,7 @@ Page({
   },
 
   onLoad() {
+    this.setData({ statusBarHeight: app.globalData.statusBarHeight || 20 })
     this.tryEnsureLogin()
   },
 
