@@ -1,56 +1,124 @@
 <view class="home-page" style="padding-top: {{statusBarHeight}}px;">
 
-  <view class="page-nav">
-    <text class="page-nav-title">时光酿</text>
-  </view>
-
   <!-- ============ 状态 A:未认领 ============ -->
   <block wx:if="{{state === 'not_claimed'}}">
-    <view class="hero-a">
-      <view class="hero-bg"></view>
-      <view class="hero-card">
-        <view class="hero-row">
-          <text class="hero-tag">样坛 · 古法红曲</text>
-          <text class="hero-num">{{availableCount}}+</text>
+    <!-- 顶部导航 -->
+    <view class="top-nav">
+      <view class="nav-back" bindtap="onBack">‹</view>
+      <view class="nav-brand">時光酿</view>
+      <view class="nav-actions">
+        <view class="nav-pill" bindtap="onShareMood">分享心情</view>
+        <view class="nav-pill" bindtap="onDiary">养情手账</view>
+      </view>
+    </view>
+
+    <!-- 主视觉:酒坛展示卡 -->
+    <view class="hero-card">
+      <view class="hero-bg-img"></view>
+
+      <view class="hero-content">
+        <view class="hero-left">
+          <view class="hero-brand">
+            <text class="brand-line">時 光 酿</text>
+          </view>
+          <view class="code-block">
+            <text class="code-prefix">BQ-0827</text>
+            <text class="code-divider">|</text>
+            <text class="code-num">{{availableCount}}</text>
+          </view>
+          <view class="series-block">
+            <text class="series-name">古法红曲</text>
+            <text class="series-divider">|</text>
+            <text class="series-year">{{currentYear}}</text>
+          </view>
         </view>
-        <view class="hero-sub">建议窖藏 · 静候认领中</view>
-        <view class="hero-stats">
-          <view class="hero-stat">
-            <text class="stat-label">🌡 酒窖温度</text>
-            <text class="stat-val">{{sampleJar.cellar_temp}}°C</text>
+
+        <view class="hero-right">
+          <view class="craft-link">
+            <text class="craft-link-title">古法酿造工序</text>
+            <text class="craft-link-tip">了解技艺 ›</text>
           </view>
-          <view class="hero-stat">
-            <text class="stat-label">💧 湿度</text>
-            <text class="stat-val">{{sampleJar.cellar_humidity}}%</text>
+        </view>
+      </view>
+
+      <!-- 5 个圆环指标 -->
+      <view class="ring-stats">
+        <view class="ring-item">
+          <view class="ring temp" style="--p: {{tempPercent}}; --c: #5B89C9;">
+            <view class="ring-inner">
+              <text class="ring-val">{{sampleJar.cellar_temp}}</text>
+              <text class="ring-unit">°C</text>
+            </view>
           </view>
+          <text class="ring-label">温度</text>
+        </view>
+        <view class="ring-item">
+          <view class="ring humid" style="--p: {{humidPercent}}; --c: #4A9DA8;">
+            <view class="ring-inner">
+              <text class="ring-val">{{sampleJar.cellar_humidity}}</text>
+              <text class="ring-unit">%</text>
+            </view>
+          </view>
+          <text class="ring-label">湿度</text>
+        </view>
+        <view class="ring-item">
+          <view class="ring lux" style="--p: {{luxPercent}}; --c: #D9A841;">
+            <view class="ring-inner">
+              <text class="ring-val">{{luxValue}}</text>
+              <text class="ring-unit">lux</text>
+            </view>
+          </view>
+          <text class="ring-label">光照</text>
+        </view>
+        <view class="ring-item">
+          <view class="ring rotate" style="--p: {{rotatePercent}}; --c: #888;">
+            <view class="ring-inner">
+              <text class="ring-val">{{rotateValue}}</text>
+              <text class="ring-unit">°</text>
+            </view>
+          </view>
+          <text class="ring-label">旋转角</text>
+        </view>
+        <view class="ring-item">
+          <view class="ring alc" style="--p: {{alcPercent}}; --c: #B85A20;">
+            <view class="ring-inner">
+              <text class="ring-val">{{alcValue}}</text>
+              <text class="ring-unit">度</text>
+            </view>
+          </view>
+          <text class="ring-label">酒精度</text>
         </view>
       </view>
     </view>
 
-    <view class="cta-wrap">
+    <!-- 大圆 CTA -->
+    <view class="cta-area">
       <view class="cta-circle" bindtap="onClaimCTA">
-        <text class="cta-icon">☁</text>
-        <text class="cta-text-1">开启</text>
-        <text class="cta-text-2">云认领</text>
+        <view class="cta-inner">
+          <text class="cta-icon">☁</text>
+          <text class="cta-text-1">开启</text>
+          <text class="cta-text-2">云认领</text>
+        </view>
       </view>
-      <view class="cta-hint">拥有一坛属于自己的时光陈酿</view>
+      <view class="cta-tags">
+        <text class="cta-tag">开始陈酿之旅</text>
+        <text class="cta-tag">匠心独运</text>
+        <text class="cta-tag">古法传承</text>
+      </view>
     </view>
 
-    <view class="section">
-      <view class="section-head">
-        <text class="section-title">古法酿造工序</text>
-        <text class="section-more">了解技艺 ›</text>
+    <!-- 古法酿造工序 -->
+    <view class="craft-section">
+      <view class="craft-head">
+        <text class="craft-title">古法酿造工序 →</text>
       </view>
-      <scroll-view scroll-x="{{true}}" class="craft-scroll" enhanced show-scrollbar="{{false}}">
-        <view class="craft-list">
-          <view class="craft-item" wx:for="{{craftSteps}}" wx:key="name">
-            <view class="craft-no">{{index + 1}}</view>
-            <view class="craft-emoji">{{item.emoji}}</view>
-            <view class="craft-name">{{item.name}}</view>
-            <view class="craft-desc">{{item.desc}}</view>
-          </view>
+      <view class="craft-grid">
+        <view class="craft-card" wx:for="{{craftSteps}}" wx:key="name">
+          <image class="craft-img" src="{{item.image}}" mode="aspectFill" />
+          <view class="craft-side-label">{{item.label}}</view>
+          <view class="craft-text">{{item.desc}}</view>
         </view>
-      </scroll-view>
+      </view>
     </view>
 
     <view class="dev-toggle" bindtap="onTogglePreview">⚙ 切换到已认领预览</view>
@@ -58,6 +126,10 @@
 
   <!-- ============ 状态 B:已认领 ============ -->
   <block wx:elif="{{state === 'claimed'}}">
+    <view class="page-nav">
+      <text class="page-nav-title">时光酿</text>
+    </view>
+
     <view class="hero-b">
       <view class="ai-jar">
         <view class="ai-jar-emoji">🍶</view>
