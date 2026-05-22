@@ -52,12 +52,29 @@ Page({
       await api.mockPay(claim.id)
 
       wx.hideLoading()
-      wx.showToast({ title: '支付成功', icon: 'success', duration: 1200 })
 
-      // 3. 1.2 秒后跳已认领首页(用户 default_claim_id 已被服务端设置,不用 demo 参数)
-      setTimeout(() => {
-        wx.reLaunch({ url: `/pages/home/home` })
-      }, 1200)
+      // 标记给 home onShow,弹庆祝提示
+      app.globalData.lastClaimSuccess = {
+        code: this.data.code,
+        at: Date.now()
+      }
+
+      // 3. 用 switchTab 切到首页 Tab(无白屏闪烁,home 自动 onShow 重拉)
+      wx.switchTab({
+        url: '/pages/home/home',
+        success: () => {
+          // 兜底:如果 home onShow 没接住,这里再 toast 一次
+          setTimeout(() => {
+            if (app.globalData.lastClaimSuccess) {
+              wx.showToast({ title: '认领成功', icon: 'success', duration: 1200 })
+              app.globalData.lastClaimSuccess = null
+            }
+          }, 300)
+        },
+        fail: () => {
+          wx.reLaunch({ url: '/pages/home/home' })
+        }
+      })
     } catch (e) {
       wx.hideLoading()
       console.error('pay fail', e)

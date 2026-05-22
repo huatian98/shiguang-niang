@@ -53,6 +53,21 @@ Page({
 
   onShow() {
     this.ensureLoginThenLoad()
+
+    // 支付成功后跳过来,弹庆祝提示
+    if (app.globalData.lastClaimSuccess) {
+      const success = app.globalData.lastClaimSuccess
+      app.globalData.lastClaimSuccess = null
+      setTimeout(() => {
+        wx.showModal({
+          title: '认领成功 🎉',
+          content: `编号 ${success.code} 已成功入窖,即将开启它的时光之旅。`,
+          showCancel: false,
+          confirmText: '查看',
+          confirmColor: '#A02828'
+        })
+      }, 600)
+    }
   },
 
   // 1. 确保已登录(没 token 就模拟登录),再拉数据

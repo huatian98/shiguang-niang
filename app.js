@@ -4,7 +4,8 @@ App({
     token: '',
     userInfo: null,
     currentClaimId: null,
-    statusBarHeight: 20
+    statusBarHeight: 20,
+    lastClaimSuccess: null  // payment → home 的支付成功消息载体
   },
 
   onLaunch() {
