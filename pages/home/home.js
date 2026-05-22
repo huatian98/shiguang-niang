@@ -242,8 +242,30 @@ Page({
     }
   },
 
-  onClaimCTA() {
-    wx.navigateTo({ url: '/pages/jar-list/jar-list' })
+  async onClaimCTA() {
+    wx.showLoading({ title: '寻坛中', mask: true })
+    try {
+      const list = await api.jarsAvailable(50)
+      const available = Array.isArray(list) ? list : []
+      if (!available.length) {
+        wx.hideLoading()
+        wx.showModal({
+          title: '暂无可认领的酒坛',
+          content: '所有酒坛都已被守护,期待下一批入窖',
+          showCancel: false,
+          confirmColor: '#A02828'
+        })
+        return
+      }
+      const picked = available[Math.floor(Math.random() * available.length)]
+      wx.hideLoading()
+      wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${picked.id}` })
+    } catch (e) {
+      wx.hideLoading()
+      console.error('onClaimCTA fail', e)
+      // 兜底:网络异常时直接跳 id=1,详情页自己处理
+      wx.navigateTo({ url: '/pages/jar-detail/jar-detail?id=1' })
+    }
   },
 
   onAITap() {
