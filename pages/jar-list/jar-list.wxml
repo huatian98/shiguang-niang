@@ -1,0 +1,37 @@
+<view class="list-page">
+  <view class="navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-back" bindtap="onBack">‹</view>
+    <view class="nav-title">挑选你的酒坛</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <view class="header">
+    <view class="title">静候认领</view>
+    <view class="sub">{{list.length}} 坛 · 古法红曲 · 限量陈酿</view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length && !loading}}">
+    <view class="empty-emoji">🍶</view>
+    <view class="empty-title">所有酒坛都已被认领</view>
+    <view class="empty-sub">期待下一批入窖</view>
+  </view>
+
+  <view class="grid">
+    <view class="jar-card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onJarTap">
+      <view class="card-bg"></view>
+      <view class="card-jar">
+        <view class="jar-mini">
+          <view class="jar-mini-neck"></view>
+          <view class="jar-mini-body"></view>
+        </view>
+      </view>
+      <view class="card-code">{{item.code}}</view>
+      <view class="card-series">{{item.series_name}}</view>
+      <view class="card-cellar">📍 {{item.cellar_name}}</view>
+      <view class="card-bottom">
+        <text class="card-price">¥{{item.price}}</text>
+        <view class="card-pick">认领 ›</view>
+      </view>
+    </view>
+  </view>
+</view>

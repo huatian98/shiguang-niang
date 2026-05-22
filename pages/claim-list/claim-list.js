@@ -119,7 +119,7 @@ Page({
   },
 
   onClaimNew() {
-    wx.navigateTo({ url: '/pages/jar-detail/jar-detail?id=1' })
+    wx.navigateTo({ url: '/pages/jar-list/jar-list' })
   },
 
   onCloseNotice() {

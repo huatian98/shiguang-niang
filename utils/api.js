@@ -12,6 +12,7 @@ module.exports = {
 
   // 系列 / 酒坛
   seriesList: () => request({ url: '/api/v1/series' }),
+  jarsAvailable: (limit = 50) => request({ url: `/api/v1/jars/available?limit=${limit}` }),
   jarMetricsLatest: (id) => request({ url: `/api/v1/jars/${id}/metrics/latest` }),
   jarTimeline: (id) => request({ url: `/api/v1/jars/${id}/timeline` }),
   jarLegacy: (id) => request({ url: `/api/claim/${id}` }),

@@ -2,6 +2,7 @@
   "pages": [
     "pages/splash/splash",
     "pages/home/home",
+    "pages/jar-list/jar-list",
     "pages/jar-detail/jar-detail",
     "pages/payment/payment",
     "pages/claim-list/claim-list",
