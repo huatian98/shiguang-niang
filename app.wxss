@@ -1,4 +1,37 @@
 page {
   background: #F5F1E8;
   font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 28rpx;
+  color: #2A2A2A;
+}
+
+/* 通用红色按钮 */
+.btn-primary {
+  background: #A02828;
+  color: #fff;
+  border-radius: 50rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 30rpx;
+}
+.btn-primary::after { border: none; }
+
+.btn-outline {
+  background: transparent;
+  color: #A02828;
+  border: 2rpx solid #A02828;
+  border-radius: 50rpx;
+  height: 88rpx;
+  line-height: 84rpx;
+  font-size: 30rpx;
+}
+.btn-outline::after { border: none; }
+
+/* 通用卡片 */
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin: 0 30rpx 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
 }
