@@ -55,6 +55,30 @@
 .claim-list {
   padding: 0 30rpx;
 }
+
+.empty {
+  margin: 60rpx 0;
+  padding: 80rpx 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+.empty-emoji {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+}
+.empty-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2A2A2A;
+  margin-bottom: 12rpx;
+}
+.empty-sub {
+  font-size: 24rpx;
+  color: #8B7A5A;
+  letter-spacing: 1rpx;
+}
 .claim-card {
   background: #fff;
   border-radius: 20rpx;

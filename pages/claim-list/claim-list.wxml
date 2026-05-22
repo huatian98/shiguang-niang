@@ -14,6 +14,11 @@
   </view>
 
   <view class="claim-list">
+    <view class="empty" wx:if="{{!claims.length}}">
+      <view class="empty-emoji">🍶</view>
+      <view class="empty-title">还没有认领的酒坛</view>
+      <view class="empty-sub">点击下方按钮,认领你的第一坛时光</view>
+    </view>
     <view class="claim-card {{item.status}}" wx:for="{{claims}}" wx:key="id">
       <view class="card-top">
         <view class="code-block">
