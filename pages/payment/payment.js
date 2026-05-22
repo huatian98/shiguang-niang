@@ -1,13 +1,14 @@
 const app = getApp()
+const api = require('../../utils/api')
 
 Page({
   data: {
     statusBarHeight: 20,
-    jarId: 1,
+    jarId: '1',
     code: '',
     series: '',
     price: 1299,
-    channel: 'wechat',  // wechat | alipay
+    channel: 'wechat',
     paying: false
   },
 
@@ -27,27 +28,42 @@ Page({
   },
 
   onSelectChannel(e) {
-    const ch = e.currentTarget.dataset.channel
-    this.setData({ channel: ch })
+    this.setData({ channel: e.currentTarget.dataset.channel })
   },
 
-  onPay() {
+  async onPay() {
     if (this.data.paying) return
     this.setData({ paying: true })
 
-    wx.showLoading({ title: '支付中', mask: true })
+    wx.showLoading({ title: '创建订单', mask: true })
 
-    // 模拟支付:1.5 秒后成功
-    setTimeout(() => {
+    try {
+      // 1. 创建认领单
+      const claim = await api.claimCreate({
+        jar_id: Number(this.data.jarId),
+        applicant_name: (app.globalData.userInfo && app.globalData.userInfo.nickname) || '酒友',
+        contact_phone: '138 **** 5678'
+      })
+
       wx.hideLoading()
-      this.setData({ paying: false })
+      wx.showLoading({ title: '支付中', mask: true })
 
+      // 2. 模拟支付
+      await api.mockPay(claim.id)
+
+      wx.hideLoading()
       wx.showToast({ title: '支付成功', icon: 'success', duration: 1200 })
 
+      // 3. 1.2 秒后跳已认领首页(用户 default_claim_id 已被服务端设置,不用 demo 参数)
       setTimeout(() => {
-        // 切到首页(已认领状态)
-        wx.reLaunch({ url: `/pages/home/home?demo=claimed` })
+        wx.reLaunch({ url: `/pages/home/home` })
       }, 1200)
-    }, 1500)
+    } catch (e) {
+      wx.hideLoading()
+      console.error('pay fail', e)
+      const msg = (e && e.message) || '支付失败,请重试'
+      wx.showModal({ title: '提示', content: msg, showCancel: false, confirmColor: '#A02828' })
+      this.setData({ paying: false })
+    }
   }
 })
