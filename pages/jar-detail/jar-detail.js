@@ -2,9 +2,9 @@ const app = getApp()
 const api = require('../../utils/api')
 
 const FALLBACK = {
-  code: 'BQ-0827',
-  series: '十摊7春分系列',
-  cellar: '四平村古窖藏',
+  code: '95279527',
+  series: '四坪南系列',
+  cellar: '四坪窖藏',
   address: '福建省宁德市屏南县',
   applicant: '可乐',
   phone: '138 **** 5678',
