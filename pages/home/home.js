@@ -1,22 +1,22 @@
 const app = getApp()
 const api = require('../../utils/api')
 
-// 8 道古法工序(对应 images/craft/01-08)
+// 8 道古法工序(横滑卡片用)
 const CRAFT_STEPS = [
-  { label: '浸米',   image: '/images/craft/01-jinmi.png',     desc: '精选糯米,清水浸润 24 小时,洗净杂质,唤醒谷魂。' },
-  { label: '蒸饭',   image: '/images/craft/02-zhengfan.png',  desc: '木甑蒸饭,文火慢蒸,饭粒晶莹松软,出甑摊凉。' },
-  { label: '拌曲',   image: '/images/craft/03-banqu.png',     desc: '古法红曲与麦曲均匀拌入,微生物悄然苏醒。' },
-  { label: '发酵',   image: '/images/craft/04-fajiao.png',    desc: '入缸发酵 7-10 日,菌群欢歌,糖化与产酒同步进行。' },
-  { label: '压榨',   image: '/images/craft/05-yazha.png',     desc: '压榨过滤,酒液与酒糟分离,初尝甘醇。' },
-  { label: '装坛',   image: '/images/craft/06-zhuangtan.png', desc: '澄清后的酒液装入酒坛,坛口用竹叶与黄泥密封。' },
-  { label: '煴酒',   image: '/images/craft/07-yunjiu.png',    desc: '暗火堆房中排列的酒坛,谷壳缓慢燃烧,为黄酒杀菌消毒。' },
-  { label: '窖藏',   image: '/images/craft/08-jiaocang.png',  desc: '暗处静养,微生物欢歌,酒香悄然孕育。' }
+  { label: '浸米淘米', image: '/images/craft/01-jinmi.png',     desc: '择吉日,取清泉,浸润糯米颗粒饱满。' },
+  { label: '蒸饭摊凉', image: '/images/craft/02-zhengfan.png',  desc: '釜中生烟,饭粒晶莹,文火慢蒸出甑摊凉。' },
+  { label: '拌曲下缸', image: '/images/craft/03-banqu.png',     desc: '红曲麦曲均匀拌入,菌群悄然苏醒。' },
+  { label: '前发酵',   image: '/images/craft/04-fajiao.png',    desc: '入缸发酵 7 至 10 日,糖化产酒同步进行。' },
+  { label: '压榨过滤', image: '/images/craft/05-yazha.png',     desc: '酒液与酒糟分离,初尝甘醇。' },
+  { label: '装坛封口', image: '/images/craft/06-zhuangtan.png', desc: '澄清酒液装入酒坛,竹叶黄泥密封坛口。' },
+  { label: '煴酒杀菌', image: '/images/craft/07-yunjiu.png',    desc: '暗火堆房,谷壳缓燃,为黄酒杀菌消毒。' },
+  { label: '入窖陈酿', image: '/images/craft/08-jiaocang.png',  desc: '暗处静养,微生物欢歌,酒香悄然孕育。' }
 ]
 
 // 兜底数据
 const FALLBACK_A = {
-  sample_jar: { code: 'BQ-0827', cellar_temp: 19.2, cellar_humidity: 74 },
-  available_count: 5500
+  sample_jar: { code: 'BQ-0827', cellar_temp: 19.2, cellar_humidity: 74, cellar_ph: 6.7 },
+  available_count: 365
 }
 
 // 工序 emoji 映射(后端返回 name,前端拼 emoji)
@@ -183,11 +183,13 @@ Page({
       const env = await api.homeCellarEnv()
       const inTemp = this.round1(env.in_cellar_temp)
       const inHum = this.round1(env.in_cellar_humidity)
+      const winePh = this.round1(env.wine_ph)
       this.setData({
         sampleJar: {
           code: 'BQ-0827',
           cellar_temp: inTemp,
-          cellar_humidity: inHum
+          cellar_humidity: inHum,
+          cellar_ph: winePh
         },
         // 圆环进度按合理区间换算成 0~100 百分比
         tempPercent: Math.min(100, Math.max(0, Math.round((inTemp - 10) * 5))),  // 10~30°C 映射 0~100
@@ -282,8 +284,19 @@ Page({
   },
 
   onBack() {
-    // 首页是 Tab 根页面,无返回
     wx.showToast({ title: '当前是首页', icon: 'none' })
+  },
+
+  onMenu() {
+    wx.showToast({ title: '菜单(敬请期待)', icon: 'none' })
+  },
+
+  onNotice() {
+    wx.showToast({ title: '消息中心(敬请期待)', icon: 'none' })
+  },
+
+  onCraftMore() {
+    wx.showToast({ title: '工艺详情(敬请期待)', icon: 'none' })
   },
 
   onShareMood() {
