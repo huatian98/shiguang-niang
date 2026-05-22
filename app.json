@@ -1,7 +1,38 @@
 {
   "pages": [
-    "pages/claim/claim"
+    "pages/splash/splash",
+    "pages/home/home",
+    "pages/jar-list/jar-list",
+    "pages/jar-detail/jar-detail",
+    "pages/payment/payment",
+    "pages/claim-list/claim-list",
+    "pages/activity/activity",
+    "pages/profile/profile"
   ],
+  "tabBar": {
+    "color": "#8B7A5A",
+    "selectedColor": "#A02828",
+    "backgroundColor": "#FAF5E8",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/claim-list/claim-list",
+        "text": "认领"
+      },
+      {
+        "pagePath": "pages/activity/activity",
+        "text": "活动"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#F5F1E8",

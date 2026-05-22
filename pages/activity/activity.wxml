@@ -1,0 +1,6 @@
+<view class="placeholder-page" style="padding-top: {{statusBarHeight}}px;">
+  <view class="ph-icon">🎉</view>
+  <view class="ph-title">活动</view>
+  <view class="ph-sub">敬请期待</view>
+  <view class="ph-tip">即将上线开坛节、品鉴会等专属活动</view>
+</view>

@@ -1,0 +1,70 @@
+<view class="pay-page">
+  <view class="navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-back" bindtap="onBack">‹</view>
+    <view class="nav-title">确认支付</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <view class="amount-card">
+    <view class="amount-row">
+      <view class="amount-left">
+        <view class="amount-label">待支付金额</view>
+        <view class="amount-num">
+          <text class="yen">¥</text>
+          <text class="num">{{price}}</text>
+          <text class="dec">.00</text>
+        </view>
+      </view>
+      <view class="amount-icon">🍷</view>
+    </view>
+  </view>
+
+  <view class="info-card">
+    <view class="info-row">
+      <text class="info-label">藏品编号</text>
+      <text class="info-value">{{code}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">产品名称</text>
+      <text class="info-value">{{series}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">权益</text>
+      <text class="info-value sub">陈酿 + 电子证书 + 终身追踪</text>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="bar"></view>
+    <text>选择支付方式</text>
+  </view>
+
+  <view class="channel-list">
+    <view class="channel {{channel === 'wechat' ? 'on' : ''}}" data-channel="wechat" bindtap="onSelectChannel">
+      <view class="ch-icon wechat">💚</view>
+      <view class="ch-name">微信支付</view>
+      <view class="ch-radio">
+        <view class="dot" wx:if="{{channel === 'wechat'}}"></view>
+      </view>
+    </view>
+    <view class="channel {{channel === 'alipay' ? 'on' : ''}}" data-channel="alipay" bindtap="onSelectChannel">
+      <view class="ch-icon alipay">💙</view>
+      <view class="ch-name">支付宝</view>
+      <view class="ch-radio">
+        <view class="dot" wx:if="{{channel === 'alipay'}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="deco">
+    <view class="deco-jar">🍶</view>
+    <view class="deco-text">岁月陈酿 · 时光为证</view>
+  </view>
+
+  <view class="pay-btn-wrap">
+    <button class="pay-btn" bindtap="onPay" loading="{{paying}}" disabled="{{paying}}">
+      立即支付 ¥{{price}}.00
+    </button>
+    <view class="pay-tip">由银联商务提供加密支付服务</view>
+  </view>
+</view>

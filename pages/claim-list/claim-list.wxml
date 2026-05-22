@@ -1,0 +1,70 @@
+<view class="list-page" style="padding-top: {{statusBarHeight}}px;">
+  <view class="page-nav">
+    <text class="page-nav-title">时光酿</text>
+  </view>
+  <view class="header">
+    <view class="title-row">
+      <text class="title">认领列表</text>
+      <text class="count">共认领 {{totalCount}} 坛</text>
+    </view>
+    <view class="tagline">岁月沉淀,静待花开</view>
+  </view>
+
+  <view class="notice" wx:if="{{showNoticeBar}}">
+    <text class="notice-icon">ⓘ</text>
+    <text class="notice-text">您有一条新认领正在处理,敬请期待</text>
+    <text class="notice-close" bindtap="onCloseNotice">✕</text>
+  </view>
+
+  <view class="claim-list">
+    <view class="empty" wx:if="{{!claims.length}}">
+      <view class="empty-emoji">🍶</view>
+      <view class="empty-title">还没有认领的酒坛</view>
+      <view class="empty-sub">点击下方按钮,认领你的第一坛时光</view>
+    </view>
+    <view class="claim-card {{item.status}}" wx:for="{{claims}}" wx:key="id">
+      <view class="card-top">
+        <view class="code-block">
+          <view class="dot {{item.status}}"></view>
+          <text class="code">{{item.code}}</text>
+          <text wx:if="{{item.is_default}}" class="default-badge">首页展示</text>
+        </view>
+        <text class="status-text {{item.status}}">{{item.status_text}}</text>
+      </view>
+
+      <view class="card-mid">
+        <view class="meta-row">
+          <text class="meta-label">系列</text>
+          <text class="meta-value">{{item.series}}</text>
+        </view>
+        <view class="meta-row">
+          <text class="meta-label">酒窖</text>
+          <text class="meta-value">{{item.cellar}}</text>
+        </view>
+        <view class="meta-row">
+          <text class="meta-label">陈酿</text>
+          <text class="meta-value highlight">{{item.aging_days}} 天</text>
+        </view>
+      </view>
+
+      <view class="card-bot">
+        <view class="card-btn"
+          wx:if="{{!item.is_default}}"
+          data-id="{{item.id}}"
+          bindtap="onSetDefault">
+          设为首页
+        </view>
+        <view class="card-btn primary"
+          data-id="{{item.id}}"
+          bindtap="onViewDetail">
+          查看详情 ›
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <view class="footer-text">✨ 续写您的时光故事</view>
+    <button class="claim-btn" bindtap="onClaimNew">+ 认领新酒</button>
+  </view>
+</view>

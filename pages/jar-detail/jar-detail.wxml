@@ -1,0 +1,56 @@
+<view class="detail-page">
+  <view class="navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-close" bindtap="onClose">✕</view>
+    <view class="nav-title">时光酿</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <view class="jar-stage">
+    <view class="jar-bg"></view>
+    <view class="jar-shape">
+      <view class="jar-neck">
+        <view class="jar-tag">认领中</view>
+      </view>
+      <view class="jar-body">
+        <view class="jar-shine"></view>
+      </view>
+      <view class="jar-shadow"></view>
+    </view>
+    <view class="breathing-tag" wx:if="{{breathingState}}">{{breathingState}}</view>
+  </view>
+
+  <view class="code">{{code}}</view>
+  <view class="series">{{series}}</view>
+
+  <view class="card">
+    <view class="watermark">時 光 凝 香</view>
+    <view class="card-header">
+      <view class="bar"></view>
+      <text>认领详情</text>
+    </view>
+    <view class="row">
+      <text class="label">申请人</text>
+      <text class="value">{{applicant}}</text>
+    </view>
+    <view class="row">
+      <text class="label">联系方式</text>
+      <text class="value">{{phone}}</text>
+    </view>
+    <view class="row">
+      <text class="label">预约酒窖</text>
+      <view class="value-block">
+        <text class="value">{{cellar}}</text>
+        <text class="sub">{{address}}</text>
+      </view>
+    </view>
+    <view class="row">
+      <text class="label">认领价格</text>
+      <text class="value price">¥ {{price}}</text>
+    </view>
+  </view>
+
+  <view class="btns">
+    <button class="btn primary" bindtap="onConfirmClaim">确定认领</button>
+    <button class="btn outline" bindtap="onBackHome">返回首页</button>
+  </view>
+</view>

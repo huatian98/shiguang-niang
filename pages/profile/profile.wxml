@@ -1,0 +1,42 @@
+<view class="profile-page" style="padding-top: {{statusBarHeight}}px;">
+  <view class="page-nav">
+    <text class="page-nav-title">我的</text>
+  </view>
+  <view class="header">
+    <view class="avatar">🍶</view>
+    <view class="user-info">
+      <view class="nickname">酒友 · demo</view>
+      <view class="user-tag">尊享守护人</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-row" bindtap="onComing">
+      <text class="row-icon">📜</text>
+      <text class="row-label">我的电子证书</text>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="card-row" bindtap="onComing">
+      <text class="row-icon">🎁</text>
+      <text class="row-label">兑换记录</text>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="card-row" bindtap="onComing">
+      <text class="row-icon">📍</text>
+      <text class="row-label">收货地址</text>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="card-row" bindtap="onComing">
+      <text class="row-icon">🛎</text>
+      <text class="row-label">消息通知</text>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="card-row" bindtap="onComing">
+      <text class="row-icon">💬</text>
+      <text class="row-label">联系客服</text>
+      <text class="row-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="version">v0.1.0 · MVP 演示版</view>
+</view>

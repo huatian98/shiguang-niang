@@ -1,0 +1,159 @@
+<view class="home-page" style="padding-top: {{statusBarHeight}}px;">
+
+  <view class="page-nav">
+    <text class="page-nav-title">时光酿</text>
+  </view>
+
+  <!-- ============ 状态 A:未认领 ============ -->
+  <block wx:if="{{state === 'not_claimed'}}">
+    <view class="hero-a">
+      <view class="hero-bg"></view>
+      <view class="hero-card">
+        <view class="hero-row">
+          <text class="hero-tag">样坛 · 古法红曲</text>
+          <text class="hero-num">{{availableCount}}+</text>
+        </view>
+        <view class="hero-sub">建议窖藏 · 静候认领中</view>
+        <view class="hero-stats">
+          <view class="hero-stat">
+            <text class="stat-label">🌡 酒窖温度</text>
+            <text class="stat-val">{{sampleJar.cellar_temp}}°C</text>
+          </view>
+          <view class="hero-stat">
+            <text class="stat-label">💧 湿度</text>
+            <text class="stat-val">{{sampleJar.cellar_humidity}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="cta-wrap">
+      <view class="cta-circle" bindtap="onClaimCTA">
+        <text class="cta-icon">☁</text>
+        <text class="cta-text-1">开启</text>
+        <text class="cta-text-2">云认领</text>
+      </view>
+      <view class="cta-hint">拥有一坛属于自己的时光陈酿</view>
+    </view>
+
+    <view class="section">
+      <view class="section-head">
+        <text class="section-title">古法酿造工序</text>
+        <text class="section-more">了解技艺 ›</text>
+      </view>
+      <scroll-view scroll-x="{{true}}" class="craft-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="craft-list">
+          <view class="craft-item" wx:for="{{craftSteps}}" wx:key="name">
+            <view class="craft-no">{{index + 1}}</view>
+            <view class="craft-emoji">{{item.emoji}}</view>
+            <view class="craft-name">{{item.name}}</view>
+            <view class="craft-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="dev-toggle" bindtap="onTogglePreview">⚙ 切换到已认领预览</view>
+  </block>
+
+  <!-- ============ 状态 B:已认领 ============ -->
+  <block wx:elif="{{state === 'claimed'}}">
+    <view class="hero-b">
+      <view class="ai-jar">
+        <view class="ai-jar-emoji">🍶</view>
+        <view class="ai-jar-zzz">z<text class="zzz-2">z</text><text class="zzz-3">Z</text></view>
+        <view class="ai-jar-action share">分享心情</view>
+        <view class="ai-jar-action diary">养情手账</view>
+      </view>
+
+      <view class="hero-b-tags">
+        <text class="hero-b-tag">沉味沉淀中</text>
+        <text class="hero-b-state">正在静默呼吸</text>
+      </view>
+
+      <view class="jar-title">
+        {{jar.alias}} · {{jar.code}}
+        <text class="jar-aging">已认领 {{agingDays}} 天</text>
+      </view>
+      <view class="jar-cellar">📍 {{jar.cellar_addr}} · {{jar.cellar_name}}</view>
+    </view>
+
+    <view class="metrics-card">
+      <view class="metrics-row main">
+        <view class="metric-big">
+          <text class="m-label">酸碱度</text>
+          <text class="m-num">{{metrics.wine_ph}}</text>
+          <text class="m-status {{metrics.ph_status === '稳定' ? 'ok' : 'warn'}}">{{metrics.ph_status}}</text>
+        </view>
+      </view>
+      <view class="metrics-grid">
+        <view class="m-cell">
+          <text class="m-cell-label">窖内温度</text>
+          <text class="m-cell-val">{{metrics.in_cellar_temp}}<text class="m-unit">°C</text></text>
+        </view>
+        <view class="m-cell">
+          <text class="m-cell-label">窖内湿度</text>
+          <text class="m-cell-val">{{metrics.in_cellar_humidity}}<text class="m-unit">%</text></text>
+        </view>
+        <view class="m-cell">
+          <text class="m-cell-label">窖外温度</text>
+          <text class="m-cell-val">{{metrics.out_cellar_temp}}<text class="m-unit">°C</text></text>
+        </view>
+        <view class="m-cell">
+          <text class="m-cell-label">窖外湿度</text>
+          <text class="m-cell-val">{{metrics.out_cellar_humidity}}<text class="m-unit">%</text></text>
+        </view>
+      </view>
+    </view>
+
+    <view class="ai-card" bindtap="onAITap">
+      <view class="ai-icon">✦</view>
+      <view class="ai-content">
+        <view class="ai-title">AI 醒酒师交互卡</view>
+        <view class="ai-text">{{metrics.ai_narrative}}</view>
+        <view class="ai-tip">点击查看完整 ›</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-head">
+        <text class="section-title">📖 黄酒成长故事</text>
+      </view>
+      <view class="timeline">
+        <view class="tl-item {{item.status}}" wx:for="{{timeline}}" wx:key="title" data-idx="{{index}}" bindtap="onTimelineTap">
+          <view class="tl-dot">
+            <text wx:if="{{item.status === 'done'}}">✓</text>
+            <text wx:elif="{{item.status === 'active'}}">⏳</text>
+            <text wx:elif="{{item.status === 'lock'}}">🔒</text>
+          </view>
+          <view class="tl-line" wx:if="{{index !== timeline.length - 1}}"></view>
+          <view class="tl-content">
+            <view class="tl-row1">
+              <text class="tl-title">{{item.title}}</text>
+              <text class="tl-date">{{item.date}}</text>
+            </view>
+            <view class="tl-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-head">
+        <text class="section-title">📚 黄酒成分科普</text>
+      </view>
+      <view class="comp-list">
+        <view class="comp-item" wx:for="{{components}}" wx:key="name">
+          <view class="comp-emoji">{{item.emoji}}</view>
+          <view class="comp-content">
+            <view class="comp-name">{{item.name}}</view>
+            <view class="comp-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="dev-toggle" bindtap="onTogglePreview">⚙ 切换到未认领预览</view>
+  </block>
+
+</view>
