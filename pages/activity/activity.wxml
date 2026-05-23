@@ -1,6 +1,81 @@
-<view class="placeholder-page" style="padding-top: {{statusBarHeight}}px;">
-  <view class="ph-icon">🎉</view>
-  <view class="ph-title">活动</view>
-  <view class="ph-sub">敬请期待</view>
-  <view class="ph-tip">即将上线开坛节、品鉴会等专属活动</view>
+<view class="activity-page" style="padding-top: {{statusBarHeight}}px;">
+
+  <!-- 顶部导航 -->
+  <view class="top-nav">
+    <view class="nav-icon" bindtap="onMenu">☰</view>
+    <view class="nav-brand">时光酿</view>
+    <view class="nav-icon" bindtap="onNotice">
+      <text class="bell">🔔</text>
+      <view class="dot-red"></view>
+    </view>
+  </view>
+
+  <!-- 标题区 -->
+  <view class="page-header">
+    <view class="header-left">
+      <text class="header-en">FIELD EVENTS</text>
+      <text class="header-zh">乡村雅集</text>
+    </view>
+    <view class="header-actions">
+      <view class="action-btn" bindtap="onCalendar">📅</view>
+      <view class="action-btn" bindtap="onFilter">⊞</view>
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view scroll-x="{{true}}" class="tag-scroll" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="tag-list">
+      <view class="tag {{activeTag === item ? 'tag-active' : ''}}"
+            wx:for="{{tags}}" wx:key="*this"
+            data-tag="{{item}}" bindtap="onTagTap">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 活动列表 -->
+  <view class="event-list">
+    <view class="event-card" wx:for="{{filteredEvents}}" wx:key="id" bindtap="onEventTap" data-id="{{item.id}}">
+
+      <!-- 封面图 -->
+      <view class="event-cover-wrap">
+        <image class="event-cover" src="{{item.cover}}" mode="aspectFill" />
+        <!-- 已结束蒙层 -->
+        <view wx:if="{{item.status === 'ended'}}" class="cover-mask"></view>
+        <!-- 角标 -->
+        <view class="event-badge badge-{{item.badgeType}}">{{item.badge}}</view>
+      </view>
+
+      <!-- 卡片内容 -->
+      <view class="event-body">
+        <view class="event-title event-title-{{item.status}}">{{item.title}}</view>
+
+        <view class="event-meta">
+          <text class="meta-item">🕐 {{item.timeStr}}</text>
+          <text class="meta-item">📍 {{item.location}}</text>
+        </view>
+
+        <!-- 进行中：头像组 -->
+        <view wx:if="{{item.status === 'active'}}" class="event-footer">
+          <view class="avatars">
+            <view class="avatar-dot" wx:for="{{item.avatars}}" wx:key="*this" wx:for-item="av">{{av}}</view>
+            <view wx:if="{{item.extraCount}}" class="avatar-dot avatar-more">+{{item.extraCount}}</view>
+          </view>
+          <view class="btn-reserve">立即预约</view>
+        </view>
+
+        <!-- 名额紧张：引言 + 按钮 -->
+        <view wx:elif="{{item.status === 'limited'}}" class="event-footer">
+          <text class="event-quote">「{{item.quote}}」</text>
+          <view class="btn-limited">仅剩 {{item.leftCount}} 位</view>
+        </view>
+
+        <!-- 已结束：说明 + 回顾按钮 -->
+        <view wx:elif="{{item.status === 'ended'}}" class="event-footer">
+          <text class="event-ended-desc">{{item.endedDesc}}</text>
+          <view class="btn-review">精彩回顾</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
 </view>
