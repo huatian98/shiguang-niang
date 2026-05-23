@@ -20,10 +20,6 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/claim-list/claim-list",
-        "text": "认领"
-      },
-      {
         "pagePath": "pages/activity/activity",
         "text": "活动"
       },

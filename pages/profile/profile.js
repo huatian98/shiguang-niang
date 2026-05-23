@@ -56,7 +56,7 @@ Page({
   },
 
   onMyClaims() {
-    wx.switchTab({ url: '/pages/claim-list/claim-list' })
+    wx.navigateTo({ url: '/pages/claim-list/claim-list' })
   },
 
   onMyActivities() {

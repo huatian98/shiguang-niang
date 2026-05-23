@@ -24,8 +24,7 @@ Page({
     totalCount: 0,
     showNoticeBar: false,
     loading: false,
-    defaultClaimId: 0,
-    avatarText: '酒'
+    defaultClaimId: 0
   },
 
   onLoad() {
@@ -35,11 +34,6 @@ Page({
 
   onShow() {
     this.loadClaims()
-    // 更新头像文字
-    const userInfo = app.globalData.userInfo
-    if (userInfo && userInfo.nickname) {
-      this.setData({ avatarText: userInfo.nickname.slice(0, 1) })
-    }
   },
 
   async tryEnsureLogin() {
@@ -132,6 +126,10 @@ Page({
   onViewDetail(e) {
     const id = e.currentTarget.dataset.id
     wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}&mode=view` })
+  },
+
+  onBack() {
+    wx.navigateBack({ delta: 1, fail: () => wx.switchTab({ url: '/pages/profile/profile' }) })
   },
 
   onOpenJar(e) {

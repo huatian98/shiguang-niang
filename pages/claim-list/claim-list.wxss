@@ -15,33 +15,13 @@ page {
   height: 88rpx;
   padding: 0 30rpx;
 }
-.nav-menu {
-  font-size: 36rpx;
-  color: #8B7A5A;
-  width: 60rpx;
-}
-.nav-brand {
-  flex: 1;
-  text-align: center;
-  font-size: 36rpx;
-  font-weight: 700;
+.nav-back {
+  font-size: 56rpx;
   color: #A02828;
-  letter-spacing: 6rpx;
-}
-.nav-avatar {
   width: 60rpx;
-  height: 60rpx;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #C8864A, #A02828);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1;
 }
-.avatar-text {
-  color: #fff;
-  font-size: 26rpx;
-  font-weight: 600;
-}
+.nav-placeholder { width: 60rpx; }
 
 /* ===== 标题区 ===== */
 .header {

@@ -2,11 +2,9 @@
 
   <!-- 顶部导航 -->
   <view class="navbar">
-    <view class="nav-menu">☰</view>
-    <text class="nav-brand">时光酿</text>
-    <view class="nav-avatar">
-      <text class="avatar-text">{{avatarText}}</text>
-    </view>
+    <view class="nav-back" bindtap="onBack">‹</view>
+    <text class="nav-brand">我的认领</text>
+    <view class="nav-placeholder"></view>
   </view>
 
   <!-- 标题区 -->

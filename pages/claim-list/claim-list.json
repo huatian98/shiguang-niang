@@ -1,4 +1,5 @@
 {
+  "navigationStyle": "custom",
   "backgroundColor": "#F5F1E8",
   "usingComponents": {}
 }
