@@ -46,18 +46,14 @@ page {
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
-  background: linear-gradient(135deg, #C8864A, #A02828);
   border: 6rpx solid #fff;
   box-shadow: 0 4rpx 18rpx rgba(160,40,40,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   margin-bottom: 20rpx;
 }
-.avatar-text {
-  color: #fff;
-  font-size: 52rpx;
-  font-weight: 700;
+.avatar-img {
+  width: 100%;
+  height: 100%;
 }
 .nickname {
   font-size: 38rpx;

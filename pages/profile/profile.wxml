@@ -10,7 +10,7 @@
   <!-- 用户信息区 -->
   <view class="user-section">
     <view class="avatar-wrap">
-      <text class="avatar-text">{{avatarText}}</text>
+      <image class="avatar-img" src="/images/decor/avatar-brewer.png" mode="aspectFill" />
     </view>
     <view class="nickname">{{nickname}}</view>
     <view class="signature">{{signature}}</view>
