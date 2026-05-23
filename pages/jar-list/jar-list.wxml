@@ -1,37 +1,41 @@
-<view class="list-page">
-  <view class="navbar" style="padding-top: {{statusBarHeight}}px;">
-    <view class="nav-back" bindtap="onBack">‹</view>
-    <view class="nav-title">挑选你的酒坛</view>
-    <view class="nav-placeholder"></view>
+<view class="jar-list-page">
+
+  <!-- 地点标签 -->
+  <view class="location-bar" bindtap="onLocationTap">
+    <text class="location-pin">📍</text>
+    <text class="location-text">屏南县 · 古法酿造窖藏</text>
+    <text class="location-arrow">›</text>
   </view>
 
-  <view class="header">
-    <view class="title">静候认领</view>
-    <view class="sub">{{list.length}} 坛 · 古法红曲 · 限量陈酿</view>
-  </view>
+  <!-- 坛位网格 -->
+  <view class="jar-grid">
 
-  <view class="empty" wx:if="{{!list.length && !loading}}">
-    <view class="empty-emoji">🍶</view>
-    <view class="empty-title">所有酒坛都已被认领</view>
-    <view class="empty-sub">期待下一批入窖</view>
-  </view>
-
-  <view class="grid">
-    <view class="jar-card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onJarTap">
-      <view class="card-bg"></view>
-      <view class="card-jar">
-        <view class="jar-mini">
-          <view class="jar-mini-neck"></view>
-          <view class="jar-mini-body"></view>
-        </view>
+    <view class="jar-card" wx:for="{{list}}" wx:key="id">
+      <!-- 酒坛图 -->
+      <view class="jar-img-wrap">
+        <image class="jar-img" src="{{item.imgSrc}}" mode="aspectFit" />
       </view>
-      <view class="card-code">{{item.code}}</view>
-      <view class="card-series">{{item.series_name}}</view>
-      <view class="card-cellar">📍 {{item.cellar_name}}</view>
-      <view class="card-bottom">
-        <text class="card-price">¥{{item.price}}</text>
-        <view class="card-pick">认领 ›</view>
+      <!-- 编号 -->
+      <view class="jar-code">编号 {{item.code}}</view>
+      <!-- 村落 -->
+      <view class="jar-village">{{item.cellar_village}}</view>
+      <!-- 系列·规格 -->
+      <view class="jar-series">{{item.series_name}} · {{item.weight}}</view>
+      <!-- 操作按钮 -->
+      <view class="jar-btns">
+        <view class="btn-detail" bindtap="onDetail" data-id="{{item.id}}">详情</view>
+        <view class="btn-claim" bindtap="onClaim" data-id="{{item.id}}">认领</view>
       </view>
     </view>
+
+    <!-- 占位卡 -->
+    <view class="jar-card jar-card-placeholder">
+      <view class="placeholder-icon">📜</view>
+      <view class="placeholder-title">等待发掘</view>
+      <view class="placeholder-sub">更多坛位...</view>
+      <view class="btn-coming">敬请期待</view>
+    </view>
+
   </view>
+
 </view>
