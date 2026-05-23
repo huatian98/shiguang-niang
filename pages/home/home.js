@@ -155,7 +155,7 @@ Page({
         state: 'claimed',
         jar: {
           code: (legacy && legacy.code) || 'BQ-0827',
-          series: (legacy && legacy.series) || '惊蛰系列',
+          series: (legacy && legacy.series) || '原酿系列',
           cellar_name: (legacy && legacy.cellar) || '四平村古窖藏',
           cellar_addr: (legacy && legacy.address) || '福建省宁德市屏南县'
         },
@@ -207,7 +207,7 @@ Page({
       state: 'claimed',
       jar: {
         code: jar.code || 'BQ-0827',
-        series: series.name || '惊蛰系列',
+        series: series.name || '原酿系列',
         cellar_name: cellar.name || '',
         cellar_addr: cellar.address || ''
       },

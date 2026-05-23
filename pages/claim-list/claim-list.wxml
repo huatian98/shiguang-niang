@@ -52,10 +52,14 @@
           <text class="status-pill {{item.status}}">{{item.status_text}}</text>
         </view>
 
-        <!-- 陈酿天数 -->
+        <!-- 陈酿天数 + 认领天数 -->
         <view class="aging-row">
           <text class="aging-label">已陈酿</text>
           <text class="aging-num">{{item.aging_days}}</text>
+          <text class="aging-unit"> 天</text>
+          <text class="claimed-divider"> · </text>
+          <text class="aging-label">已认领</text>
+          <text class="aging-num">{{item.claimed_days}}</text>
           <text class="aging-unit"> 天</text>
         </view>
 

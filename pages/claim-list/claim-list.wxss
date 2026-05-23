@@ -216,6 +216,11 @@ page {
   font-size: 22rpx;
   color: #8B7A5A;
 }
+.claimed-divider {
+  font-size: 22rpx;
+  color: #C9B89A;
+  margin: 0 12rpx;
+}
 
 /* 按钮行 */
 .btn-row {

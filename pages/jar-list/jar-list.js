@@ -18,13 +18,13 @@ Page({
   },
 
   onDetail(e) {
-    const id = e.currentTarget.dataset.id
-    wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}&mode=view` })
+    const { id, series_name } = e.currentTarget.dataset
+    wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}&mode=view&series=${encodeURIComponent(series_name || '')}` })
   },
 
   onClaim(e) {
-    const id = e.currentTarget.dataset.id
-    wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}` })
+    const { id, series_name, price } = e.currentTarget.dataset
+    wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}&series=${encodeURIComponent(series_name || '')}&price=${price || ''}` })
   },
 
   onLocationTap() {

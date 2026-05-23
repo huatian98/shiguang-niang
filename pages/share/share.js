@@ -28,7 +28,7 @@ Page({
       statusBarHeight: home.statusBarHeight || 20,
       jar: {
         code: jar.code || 'BQ-0827',
-        series: jar.series || '惊蛰系列',
+        series: jar.series || '原酿系列',
         cellar_name: jar.cellar_name || '四坪村窖藏',
         cellar_addr: jar.cellar_addr || ''
       },

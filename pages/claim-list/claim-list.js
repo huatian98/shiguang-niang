@@ -1,6 +1,10 @@
 const app = getApp()
 const api = require('../../utils/api')
 
+// 演示用：固定陈酿天数（jar_id → 天数）
+const AGING_OPTIONS = [370, 450, 1500, 30]
+const AGING_DAYS_MAP = { 1: 370, 2: 1500, 3: 450, 4: 30 }
+
 const STATUS_MAP = {
   pending:   { code: 'sleeping', text: '待支付' },
   cancelled: { code: 'sleeping', text: '已取消' },
@@ -65,14 +69,15 @@ Page({
 
       const list = await api.claimList()
       const claims = (Array.isArray(list) ? list : []).map(c => {
-        const days = this.calcDays(c.paid_at || c.created_at)
+        const days = AGING_DAYS_MAP[c.jar_id] !== undefined ? AGING_DAYS_MAP[c.jar_id] : this.calcDays(c.paid_at || c.created_at)
         const stm = STATUS_MAP[c.status] || deriveAgingStatus(days, c.status)
         return {
           id: c.id,
           jarId: this.jarIdThumb(c.jar_id),
-          code: this.codeFromJar(c.jar_id),
-          series: '十摊系列',
-          aging_days: days,
+          code: c.jar_code || this.codeFromJar(c.jar_id),
+          series: c.series_name || '时光酿系列',
+          aging_days: AGING_DAYS_MAP[c.jar_id] !== undefined ? AGING_DAYS_MAP[c.jar_id] : AGING_OPTIONS[(c.jar_id - 1) % AGING_OPTIONS.length],
+          claimed_days: this.calcDays(c.paid_at || c.created_at),
           status: stm.code,
           status_text: stm.text,
           is_default: defaultClaimId === c.id

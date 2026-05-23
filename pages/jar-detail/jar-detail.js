@@ -3,17 +3,17 @@ const api = require('../../utils/api')
 
 const FALLBACK = {
   code: '95279527',
-  series: '四坪南系列',
+  series: '原酿系列',
   cellar: '四坪窖藏',
   address: '福建省宁德市屏南县',
   applicant: '可乐',
   phone: '138 **** 5678',
-  price: 1299,
+  price: 198,
   breathing_state: '风味沉淀中'
 }
 
 // 系列名 → 价格映射(后端老接口没返回价格,先按系列 id 推断)
-const PRICE_BY_ID = { '1': 1299, '2': 1499, '3': 1899 }
+const PRICE_BY_ID = { '1': 198, '2': 198, '3': 198 }
 
 Page({
   data: {
@@ -25,7 +25,7 @@ Page({
     address: '',
     applicant: '',
     phone: '',
-    price: 1299,
+    price: 198,
     breathingState: '',
     loading: false
   },
@@ -33,11 +33,13 @@ Page({
   onLoad(options) {
     this.setData({ statusBarHeight: app.globalData.statusBarHeight || 20 })
     const id = (options && options.id) || '1'
+    const seriesFromUrl = options && options.series ? decodeURIComponent(options.series) : ''
+    const priceFromUrl = options && options.price ? Number(options.price) : 0
     this.setData({ jarId: id })
-    this.loadAll(id)
+    this.loadAll(id, seriesFromUrl, priceFromUrl)
   },
 
-  async loadAll(id) {
+  async loadAll(id, seriesFromUrl, priceFromUrl) {
     this.setData({ loading: true })
     wx.showLoading({ title: '加载中', mask: true })
 
@@ -49,12 +51,12 @@ Page({
 
       this.setData({
         code: (legacy && legacy.code) || FALLBACK.code,
-        series: (legacy && legacy.series) || FALLBACK.series,
+        series: seriesFromUrl || (legacy && legacy.series) || FALLBACK.series,
         cellar: (legacy && legacy.cellar) || FALLBACK.cellar,
         address: (legacy && legacy.address) || FALLBACK.address,
         applicant: (legacy && legacy.applicant) || FALLBACK.applicant,
         phone: (legacy && legacy.phone) || FALLBACK.phone,
-        price: PRICE_BY_ID[id] || FALLBACK.price,
+        price: priceFromUrl || PRICE_BY_ID[id] || FALLBACK.price,
         breathingState: (metrics && metrics.breathing_state) || FALLBACK.breathing_state
       })
     } catch (e) {

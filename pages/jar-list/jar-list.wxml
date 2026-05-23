@@ -25,8 +25,8 @@
       <view class="jar-price">¥{{item.price}}</view>
       <!-- 操作按钮 -->
       <view class="jar-btns">
-        <view class="btn-detail" bindtap="onDetail" data-id="{{item.id}}">详情</view>
-        <view class="btn-claim" bindtap="onClaim" data-id="{{item.id}}">认领</view>
+        <view class="btn-detail" bindtap="onDetail" data-id="{{item.id}}" data-series_name="{{item.series_name}}">详情</view>
+        <view class="btn-claim" bindtap="onClaim" data-id="{{item.id}}" data-series_name="{{item.series_name}}" data-price="{{item.price}}">认领</view>
       </view>
     </view>
 
