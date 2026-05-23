@@ -2,9 +2,9 @@ const app = getApp()
 
 const STATIC_LIST = [
   { id: 1, code: 'SP-0001', series_name: '原酿', cellar_village: '四坪村', weight: '10斤', years: '5年', price: 298 },
-  { id: 2, code: 'SP-0002', series_name: '酒酿酒', cellar_village: '北墘村', weight: '5斤', years: '5年', price: 198 },
-  { id: 3, code: 'SP-0003', series_name: '原酿', cellar_village: '山头村', weight: '10斤', years: '1年', price: 198 },
-  { id: 4, code: 'SP-0004', series_name: '酒酿酒', cellar_village: '双溪村', weight: '5斤', years: '1年', price: 118 }
+  { id: 2, code: 'SP-0002', series_name: '酒酿酒', cellar_village: '四坪村', weight: '5斤', years: '5年', price: 198 },
+  { id: 3, code: 'SP-0003', series_name: '原酿', cellar_village: '四坪村', weight: '10斤', years: '1年', price: 198 },
+  { id: 4, code: 'SP-0004', series_name: '酒酿酒', cellar_village: '四坪村', weight: '5斤', years: '1年', price: 118 }
 ]
 
 Page({
