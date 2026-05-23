@@ -1,24 +1,4 @@
-<view class="splash-page" style="padding-top: {{statusBarHeight}}px;">
-
-  <!-- 顶部品牌 -->
-  <view class="brand-area">
-    <view class="main-title">时光酿</view>
-    <view class="sub-title">非遗技艺 · 红曲黄酒酿造</view>
-  </view>
-
-  <!-- 工序卡片 -->
-  <view class="craft-card">
-    <image class="craft-img" src="{{frames[currentFrame].image}}" mode="aspectFill" />
-    <view class="craft-label">{{frames[currentFrame].label}}</view>
-  </view>
-
-  <!-- 说明文字 -->
-  <view class="craft-desc">{{frames[currentFrame].desc}}</view>
-
-  <!-- 底部 -->
-  <view class="splash-footer">
-    <view class="loading-hint">黄酒酿造中...</view>
-    <view class="skip-btn" bindtap="onSkip">跳过 ›</view>
-  </view>
-
+<view class="splash-page">
+  <image class="craft-img" src="{{frames[currentFrame]}}" mode="aspectFit" />
+  <view class="skip-btn" bindtap="onSkip">跳过 ›</view>
 </view>

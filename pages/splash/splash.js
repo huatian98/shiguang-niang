@@ -1,47 +1,41 @@
 const app = getApp()
 
 const FRAMES = [
-  {
-    label: '蒸饭\n摊凉',
-    image: '/images/craft/02-zhengfan.png',
-    desc: '蒸熟后的糯米饭摊在大竹篛上，降温到适合发酵生物繁育的温度。'
-  },
-  {
-    label: '拌曲\n下缸',
-    image: '/images/craft/03-banqu.png',
-    desc: '红曲麦曲均匀拌入，菌群悄然苏醒，古法酿造正式开始。'
-  },
-  {
-    label: '入窖\n陈酿',
-    image: '/images/craft/08-jiaocang.png',
-    desc: '暗处静养，微生物欢歌，属于你的时光陈酿悄然孕育。'
-  }
+  '/images/splash/craft-1.png',
+  '/images/splash/craft-2.png',
+  '/images/splash/craft-3.png',
+  '/images/splash/craft-4.png',
+  '/images/splash/craft-5.png',
+  '/images/splash/craft-6.png',
+  '/images/splash/craft-7.png',
+  '/images/splash/craft-8.png',
+  '/images/splash/craft-9.png',
+  '/images/splash/craft-10.png'
 ]
 
-const FRAME_DURATION = 1200  // 每帧停留毫秒
+const FRAME_DURATION = 800
 
 Page({
   data: {
-    statusBarHeight: 20,
     frames: FRAMES,
     currentFrame: 0
   },
 
   onLoad() {
     this.setData({ statusBarHeight: app.globalData.statusBarHeight || 20 })
-    this._startFrames()
+    this._start()
   },
 
   onUnload() {
-    this._clearTimers()
+    this._clear()
   },
 
-  _startFrames() {
+  _start() {
     let frame = 0
     this.frameTimer = setInterval(() => {
       frame++
       if (frame >= FRAMES.length) {
-        this._clearTimers()
+        this._clear()
         this.goHome()
         return
       }
@@ -49,12 +43,12 @@ Page({
     }, FRAME_DURATION)
   },
 
-  _clearTimers() {
+  _clear() {
     if (this.frameTimer) clearInterval(this.frameTimer)
   },
 
   onSkip() {
-    this._clearTimers()
+    this._clear()
     this.goHome()
   },
 
