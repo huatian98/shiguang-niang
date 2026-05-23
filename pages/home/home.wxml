@@ -140,7 +140,7 @@
     <view class="ai-card {{jarState === 'acid' ? 'ai-card-warn' : ''}}" bindtap="onAITap">
       <view class="ai-icon {{jarState === 'acid' ? 'ai-icon-warn' : ''}}">{{jarState === 'acid' ? '⚠️' : '✦'}}</view>
       <view class="ai-content">
-        <view class="ai-title {{jarState === 'acid' ? 'ai-title-warn' : ''}}">{{jarState === 'acid' ? '⚠️ AI 酿酒师感说' : '✦ AI 酿酒师感说'}}</view>
+        <view class="ai-title {{jarState === 'acid' ? 'ai-title-warn' : ''}}">AI 酿酒师感说</view>
         <view class="ai-text">{{metrics.ai_narrative}}</view>
         <view class="ai-tags">
           <text wx:if="{{jarState === 'acid'}}" class="ai-tag ai-tag-orange">🟠 酸度：偏高关注</text>
