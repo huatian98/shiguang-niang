@@ -26,10 +26,7 @@ const FALLBACK_TIMELINE = [
 ]
 
 const FALLBACK_COMPONENTS = [
-  { name: '氨基酸', description: '黄酒含有 18 种氨基酸，其中 8 种是人体必需氨基酸' },
-  { name: '多酚类', description: '抗氧化活性物质，有助于延缓衰老' },
-  { name: '低聚糖', description: '促进肠道益生菌繁殖，改善消化' },
-  { name: '麦角甾醇', description: '红曲特有，可调节胆固醇代谢' }
+  { name: '氨基酸', description: '黄酒含有 18 种氨基酸，其中 8 种是人体必需氨基酸' }
 ]
 
 // 工序 emoji 映射(后端返回 name,前端拼 emoji)
@@ -283,7 +280,7 @@ Page({
   },
 
   formatComponents(list) {
-    const src = (Array.isArray(list) && list.length >= 4) ? list : FALLBACK_COMPONENTS
+    const src = (Array.isArray(list) && list.length) ? list : FALLBACK_COMPONENTS
     return src.map(c => ({
       name: c.name,
       desc: c.description || '',
