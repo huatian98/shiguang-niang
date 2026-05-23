@@ -283,7 +283,7 @@ Page({
   },
 
   formatComponents(list) {
-    const src = (Array.isArray(list) && list.length) ? list : FALLBACK_COMPONENTS
+    const src = (Array.isArray(list) && list.length >= 4) ? list : FALLBACK_COMPONENTS
     return src.map(c => ({
       name: c.name,
       desc: c.description || '',
