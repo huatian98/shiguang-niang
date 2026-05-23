@@ -246,9 +246,9 @@ Page({
     // 先按时间排序
     const sorted = [...src].sort((a, b) => new Date(a.happened_at) - new Date(b.happened_at))
 
-    // 分出"过去/未来"
-    const past = sorted.filter(t => new Date(t.happened_at).getTime() <= now)
-    const future = sorted.filter(t => new Date(t.happened_at).getTime() > now)
+    // 分出"过去/未来" (72h 窗口内算进行中)
+    const past = sorted.filter(t => new Date(t.happened_at).getTime() <= now + 72 * 3600 * 1000)
+    const future = sorted.filter(t => new Date(t.happened_at).getTime() > now + 72 * 3600 * 1000)
 
     const items = [
       ...past.map((t, i) => ({
@@ -277,8 +277,8 @@ Page({
   timelineStatus(t) {
     const happened = new Date(t.happened_at).getTime()
     const now = Date.now()
-    if (happened < now - 12 * 3600 * 1000) return 'done'
-    if (happened > now + 12 * 3600 * 1000) return 'lock'
+    if (happened < now - 72 * 3600 * 1000) return 'done'
+    if (happened > now + 72 * 3600 * 1000) return 'lock'
     return 'active'
   },
 
