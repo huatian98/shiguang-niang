@@ -21,6 +21,8 @@ Page({
     const home = app.globalData
     const jar = home.currentJar || {}
     const userInfo = home.userInfo || {}
+    const jarId = home.currentJarId || 1
+    const jarImg = `/images/jars/jar-${jarId}.png`
 
     this.setData({
       statusBarHeight: home.statusBarHeight || 20,
@@ -30,7 +32,7 @@ Page({
         cellar_name: jar.cellar_name || '四坪村窖藏',
         cellar_addr: jar.cellar_addr || ''
       },
-      jarImg: home.currentJarImg || '/images/jar-states/state-normal.png',
+      jarImg,
       senderName: userInfo.nickname || userInfo.name || '时光酿友',
       avatarUrl: userInfo.avatar_url || '/images/avatar-placeholder.png',
       giftPoem: GIFT_POEMS[Math.floor(Math.random() * GIFT_POEMS.length)]

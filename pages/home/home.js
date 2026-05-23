@@ -351,6 +351,7 @@ Page({
     }
     app.globalData.currentJar = jar
     app.globalData.currentJarImg = jarStateImg
+    app.globalData.currentJarId = app.globalData.currentClaimId || 1
     wx.navigateTo({ url: '/pages/share/share' })
   },
 
