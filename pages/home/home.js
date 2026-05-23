@@ -19,6 +19,12 @@ const FALLBACK_A = {
   available_count: 365
 }
 
+const FALLBACK_TIMELINE = [
+  { title: '正式认领', description: '您已成为这坛酒的守护人', happened_at: new Date(Date.now() - 2 * 86400000).toISOString() },
+  { title: '入窖陈酿', description: '酒坛搬入古窖，开启慢呼吸的旅程', happened_at: new Date(Date.now() - 86400000).toISOString() },
+  { title: '开坛品鉴', description: '静候成熟。', happened_at: new Date(Date.now() + 365 * 86400000).toISOString() }
+]
+
 // 工序 emoji 映射(后端返回 name,前端拼 emoji)
 const STEP_EMOJI = ['💧', '🍚', '🍶', '🌾', '🏛', '🍷', '✨', '🌿']
 
@@ -218,8 +224,8 @@ Page({
   },
 
   formatTimeline(list) {
-    if (!Array.isArray(list) || !list.length) return []
-    return list.map(t => ({
+    const src = (Array.isArray(list) && list.length) ? list : FALLBACK_TIMELINE
+    return src.map(t => ({
       title: t.title,
       desc: t.description || '',
       date: this.formatDate(t.happened_at),
