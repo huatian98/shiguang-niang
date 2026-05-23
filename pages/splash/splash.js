@@ -24,7 +24,7 @@ Page({
     // 最后一帧后自动跳转
     this.exitTimer = setTimeout(() => {
       this.goHome()
-    }, FRAMES.length * 1200 + 400)
+    }, FRAMES.length * 3000 + 400)
   },
 
   onUnload() {

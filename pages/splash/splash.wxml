@@ -10,7 +10,7 @@
   <swiper
     class="craft-swiper"
     autoplay="{{true}}"
-    interval="{{1200}}"
+    interval="{{3000}}"
     duration="{{400}}"
     circular="{{false}}"
     current="{{currentFrame}}"
@@ -18,13 +18,10 @@
   >
     <swiper-item wx:for="{{frames}}" wx:key="image">
       <view class="craft-card">
-        <image class="craft-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{false}}" />
+        <image class="craft-img" src="{{item.image}}" mode="aspectFit" lazy-load="{{false}}" />
       </view>
     </swiper-item>
   </swiper>
-
-  <!-- 工序说明 -->
-  <view class="craft-desc">{{frames[currentFrame].desc}}</view>
 
   <!-- 底部 -->
   <view class="splash-footer">
