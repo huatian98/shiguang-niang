@@ -1,0 +1,63 @@
+<view class="share-page" style="padding-top: {{statusBarHeight}}px;">
+
+  <!-- 顶部导航 -->
+  <view class="top-nav">
+    <view class="nav-icon" bindtap="onMenu">☰</view>
+    <view class="nav-brand">时光酿</view>
+    <view class="nav-avatar" bindtap="onProfile">
+      <image class="avatar-img" src="{{avatarUrl}}" mode="aspectFill" />
+    </view>
+  </view>
+
+  <!-- 酒坛主图 -->
+  <view class="jar-img-wrap">
+    <image class="jar-img" src="{{jarImg}}" mode="aspectFill" />
+    <view class="series-tag">{{jar.series}}</view>
+  </view>
+
+  <!-- 赠友信息卡 -->
+  <view class="gift-card">
+    <view class="gift-card-head">
+      <text class="gift-title">赠友同酿</text>
+      <text class="gift-leaf">🍃</text>
+    </view>
+    <view class="gift-divider"></view>
+
+    <view class="gift-grid">
+      <view class="gift-cell">
+        <view class="gift-label">编号（ID）</view>
+        <view class="gift-val">{{jar.code}}</view>
+      </view>
+      <view class="gift-cell">
+        <view class="gift-label">系列</view>
+        <view class="gift-val">{{jar.series}}</view>
+      </view>
+      <view class="gift-cell">
+        <view class="gift-label">赠送人</view>
+        <view class="gift-val">{{senderName}}</view>
+      </view>
+      <view class="gift-cell">
+        <view class="gift-label">所属酒窖</view>
+        <view class="gift-val">{{jar.cellar_name}}</view>
+      </view>
+    </view>
+
+    <!-- 赠语 + 小程序码 -->
+    <view class="gift-bottom">
+      <view class="gift-quote-wrap">
+        <view class="gift-quote">「{{giftPoem}}」</view>
+        <view class="gift-qr-hint">📱 长按扫描二维码查看陈酿</view>
+      </view>
+      <view class="gift-qr-box">
+        <text class="gift-qr-text">🍷</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="share-footer">
+    <view class="btn-save" bindtap="onSaveShare">↓ 保存并分享</view>
+    <view class="btn-back" bindtap="onBackHome">⌂ 返回首页</view>
+  </view>
+
+</view>

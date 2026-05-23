@@ -1,0 +1,188 @@
+.share-page {
+  min-height: 100vh;
+  background: #F5F1E8;
+  padding-bottom: 80rpx;
+  box-sizing: border-box;
+}
+
+/* 顶部导航 */
+.top-nav {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 28rpx;
+}
+.nav-icon {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #A02828;
+}
+.nav-brand {
+  flex: 1;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #8C2424;
+  letter-spacing: 10rpx;
+}
+.nav-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2rpx solid rgba(140,36,36,0.2);
+}
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 酒坛主图 */
+.jar-img-wrap {
+  position: relative;
+  margin: 0 30rpx 0;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+.jar-img {
+  width: 100%;
+  height: 500rpx;
+  display: block;
+}
+.series-tag {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  background: #A02828;
+  color: #FFE6B0;
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+/* 赠友信息卡 */
+.gift-card {
+  margin: 24rpx 30rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx 30rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+}
+.gift-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+.gift-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #A02828;
+  letter-spacing: 2rpx;
+}
+.gift-leaf {
+  font-size: 36rpx;
+  opacity: 0.7;
+}
+.gift-divider {
+  height: 1rpx;
+  background: #EDE8DE;
+  margin-bottom: 24rpx;
+}
+
+/* 四格信息 */
+.gift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 24rpx;
+  column-gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+.gift-label {
+  font-size: 20rpx;
+  color: #8B7A5A;
+  margin-bottom: 6rpx;
+  letter-spacing: 0.5rpx;
+}
+.gift-val {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2A2A2A;
+  letter-spacing: 1rpx;
+}
+
+/* 赠语 + 二维码 */
+.gift-bottom {
+  display: flex;
+  align-items: flex-end;
+  gap: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EDE8DE;
+}
+.gift-quote-wrap {
+  flex: 1;
+}
+.gift-quote {
+  font-size: 24rpx;
+  color: #4A3A2A;
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 14rpx;
+}
+.gift-qr-hint {
+  font-size: 20rpx;
+  color: #A02828;
+  letter-spacing: 0.5rpx;
+}
+.gift-qr-box {
+  width: 120rpx;
+  height: 120rpx;
+  border: 1rpx solid #E8DCC0;
+  border-radius: 10rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #FAF5E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gift-qr-text {
+  font-size: 52rpx;
+}
+
+/* 底部操作 */
+.share-footer {
+  margin: 32rpx 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+.btn-save {
+  width: 100%;
+  height: 96rpx;
+  background: #A02828;
+  color: #FFE6B0;
+  border-radius: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 4rpx;
+  box-shadow: 0 8rpx 24rpx rgba(140,36,36,0.28);
+}
+.btn-save:active { opacity: 0.88; }
+.btn-back {
+  font-size: 26rpx;
+  color: #8B7A5A;
+  letter-spacing: 2rpx;
+  padding: 10rpx 30rpx;
+}
+.btn-back:active { opacity: 0.7; }

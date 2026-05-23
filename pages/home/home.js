@@ -344,7 +344,14 @@ Page({
   },
 
   onInvite() {
-    wx.showToast({ title: '邀请功能即将上线', icon: 'none' })
+    const { jar, jarStateImg } = this.data
+    if (!jar) {
+      wx.showToast({ title: '请先认领一坛酒', icon: 'none' })
+      return
+    }
+    app.globalData.currentJar = jar
+    app.globalData.currentJarImg = jarStateImg
+    wx.navigateTo({ url: '/pages/share/share' })
   },
 
   onBack() {
