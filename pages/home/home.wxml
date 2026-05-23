@@ -148,22 +148,28 @@
     <!-- 黄酒成长故事 -->
     <view class="section">
       <view class="section-head">
-        <text class="section-title">📖 黄酒成长故事</text>
+        <text class="section-icon">📜</text>
+        <text class="section-title">黄酒成长故事</text>
       </view>
       <view class="timeline">
-        <view class="tl-item {{item.status}}" wx:for="{{timeline}}" wx:key="title" data-idx="{{index}}" bindtap="onTimelineTap">
-          <view class="tl-dot">
-            <text wx:if="{{item.status === 'done'}}">✓</text>
-            <text wx:elif="{{item.status === 'active'}}">⏳</text>
-            <text wx:elif="{{item.status === 'lock'}}">🔒</text>
-          </view>
-          <view class="tl-line" wx:if="{{index !== timeline.length - 1}}"></view>
-          <view class="tl-content">
-            <view class="tl-row1">
-              <text class="tl-title">{{item.title}}</text>
-              <text class="tl-date">{{item.date}}</text>
+        <view class="tl-item" wx:for="{{timeline}}" wx:key="title" data-idx="{{index}}" bindtap="onTimelineTap">
+          <!-- 左侧圆点 + 连接线 -->
+          <view class="tl-left">
+            <view class="tl-dot tl-dot-{{item.status}}">
+              <text wx:if="{{item.status === 'done'}}">✓</text>
+              <text wx:elif="{{item.status === 'active'}}">⏳</text>
+              <text wx:elif="{{item.status === 'lock'}}">🔒</text>
             </view>
-            <view class="tl-desc">{{item.desc}}</view>
+            <view class="tl-line" wx:if="{{index !== timeline.length - 1}}"></view>
+          </view>
+          <!-- 右侧卡片 -->
+          <view class="tl-card tl-card-{{item.status}}">
+            <view class="tl-card-top">
+              <text class="tl-card-title tl-title-{{item.status}}">{{item.title}}</text>
+              <text wx:if="{{item.status === 'done'}}" class="tl-status-done">已完成</text>
+              <text wx:elif="{{item.status === 'active'}}" class="tl-status-active">进行中</text>
+            </view>
+            <view wx:if="{{item.desc}}" class="tl-card-desc tl-desc-{{item.status}}">{{item.desc}}</view>
           </view>
         </view>
       </view>
@@ -172,11 +178,14 @@
     <!-- 黄酒成分科普 -->
     <view class="section">
       <view class="section-head">
-        <text class="section-title">📚 黄酒成分科普</text>
+        <text class="section-icon">📋</text>
+        <text class="section-title">黄酒成分科普</text>
       </view>
       <view class="comp-list">
-        <view class="comp-item" wx:for="{{components}}" wx:key="name">
-          <view class="comp-emoji">{{item.emoji}}</view>
+        <view class="comp-card" wx:for="{{components}}" wx:key="name">
+          <view class="comp-icon-wrap">
+            <text class="comp-shield">🛡</text>
+          </view>
           <view class="comp-content">
             <view class="comp-name">{{item.name}}</view>
             <view class="comp-desc">{{item.desc}}</view>

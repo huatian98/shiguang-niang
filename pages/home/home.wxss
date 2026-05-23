@@ -494,16 +494,21 @@
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
 }
 .tl-item {
-  position: relative;
-  padding: 0 0 36rpx 60rpx;
+  display: flex;
+  gap: 20rpx;
+  padding-bottom: 30rpx;
 }
-.tl-item:last-child { padding-bottom: 10rpx; }
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
 .tl-dot {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 40rpx;
-  height: 40rpx;
+  width: 44rpx;
+  height: 44rpx;
   border-radius: 50%;
   background: #C4B59A;
   color: #fff;
@@ -511,63 +516,105 @@
   align-items: center;
   justify-content: center;
   font-size: 22rpx;
-  z-index: 2;
+  flex-shrink: 0;
 }
-.tl-item.done .tl-dot { background: #2E6F2A; }
-.tl-item.active .tl-dot { background: #A02828; }
-.tl-item.lock .tl-dot { background: #C4B59A; }
+.tl-dot-done  { background: #2E7A26; }
+.tl-dot-active { background: #8C2424; }
+.tl-dot-lock  { background: #C4B59A; }
+
 .tl-line {
-  position: absolute;
-  left: 19rpx;
-  top: 40rpx;
   width: 2rpx;
-  bottom: -10rpx;
+  flex: 1;
+  min-height: 20rpx;
   background: #E8DCC0;
+  margin-top: 8rpx;
 }
-.tl-row1 {
+
+/* 时间线卡片 */
+.tl-card {
+  flex: 1;
+  background: #F9F6F0;
+  border-radius: 14rpx;
+  padding: 18rpx 20rpx;
+  margin-bottom: 4rpx;
+}
+.tl-card-active {
+  background: #fff;
+  border: 2rpx solid #A02828;
+}
+.tl-card-lock {
+  background: #F5F2EC;
+  opacity: 0.7;
+}
+.tl-card-top {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
-.tl-title {
+.tl-card-title {
   font-size: 28rpx;
   font-weight: 600;
   color: #2A2A2A;
+  flex: 1;
+  margin-right: 12rpx;
 }
-.tl-item.lock .tl-title { color: #B5A480; }
-.tl-date {
-  font-size: 22rpx;
+.tl-title-active { color: #8C2424; }
+.tl-title-lock   { color: #B5A480; font-weight: 400; }
+
+.tl-status-done {
+  font-size: 20rpx;
   color: #8B7A5A;
+  white-space: nowrap;
 }
-.tl-desc {
-  margin-top: 8rpx;
+.tl-status-active {
+  font-size: 20rpx;
+  color: #A02828;
+  background: rgba(160,40,40,0.1);
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  white-space: nowrap;
+}
+
+.tl-card-desc {
+  margin-top: 10rpx;
   font-size: 24rpx;
   color: #6B5A4A;
-  line-height: 1.5;
+  line-height: 1.6;
 }
+.tl-desc-lock { color: #B5A480; }
 
 /* 成分卡 */
 .comp-list {
   margin: 0 30rpx;
 }
-.comp-item {
+.comp-card {
   display: flex;
   align-items: center;
   padding: 20rpx;
   background: #fff;
   border-radius: 14rpx;
   margin-bottom: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03);
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
 }
-.comp-emoji {
-  font-size: 44rpx;
+.comp-icon-wrap {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: rgba(160,40,40,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   margin-right: 20rpx;
 }
+.comp-shield { font-size: 30rpx; }
+.comp-content { flex: 1; }
 .comp-name {
   font-size: 28rpx;
   font-weight: 600;
-  color: #2A2A2A;
-  margin-bottom: 4rpx;
+  color: #8C2424;
+  margin-bottom: 6rpx;
+  letter-spacing: 1rpx;
 }
 .comp-desc {
   font-size: 22rpx;
