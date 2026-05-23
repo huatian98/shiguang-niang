@@ -6,10 +6,22 @@
     <view class="sub-title">非遗技艺 · 红曲黄酒酿造</view>
   </view>
 
-  <!-- 工序卡片 -->
-  <view class="craft-card">
-    <image class="craft-img" src="{{frames[currentFrame].image}}" mode="aspectFill" />
-  </view>
+  <!-- 工序轮播卡片 -->
+  <swiper
+    class="craft-swiper"
+    autoplay="{{true}}"
+    interval="{{1200}}"
+    duration="{{400}}"
+    circular="{{false}}"
+    current="{{currentFrame}}"
+    bindchange="onSwiperChange"
+  >
+    <swiper-item wx:for="{{frames}}" wx:key="image">
+      <view class="craft-card">
+        <image class="craft-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{false}}" />
+      </view>
+    </swiper-item>
+  </swiper>
 
   <!-- 工序说明 -->
   <view class="craft-desc">{{frames[currentFrame].desc}}</view>
