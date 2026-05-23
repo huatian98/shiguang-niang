@@ -365,6 +365,7 @@
 .pill-orange { background: rgba(255,220,140,0.92); color: #8B4A10; }
 .pill-green  { background: rgba(200,240,200,0.92); color: #2A6A2A; }
 .pill-red    { background: rgba(255,200,190,0.92); color: #A02828; }
+.pill-gray   { background: rgba(220,215,205,0.92); color: #5A5050; }
 
 /* 酒坛信息行 */
 .jar-info-row {
@@ -467,8 +468,17 @@
   padding: 4rpx 16rpx;
   border-radius: 14rpx;
 }
-.ai-tag-red   { background: rgba(160,40,40,0.1); color: #A02828; }
-.ai-tag-green { background: rgba(46,122,38,0.1); color: #2E7A26; }
+.ai-tag-red    { background: rgba(160,40,40,0.1);  color: #A02828; }
+.ai-tag-green  { background: rgba(46,122,38,0.1);  color: #2E7A26; }
+.ai-tag-orange { background: rgba(200,90,32,0.1);  color: #C85A20; }
+.ai-tag-blue   { background: rgba(74,90,154,0.1);  color: #4A5A9A; }
+
+/* AI 卡片 - 酸度偏高警告态 */
+.ai-card-warn {
+  border-left-color: #C85A20;
+}
+.ai-icon-warn { color: #C85A20; }
+.ai-title-warn { color: #C85A20; }
 
 /* B 状态:section 标题(成长故事/成分科普) */
 .section { margin-top: 30rpx; }

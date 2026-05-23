@@ -20,9 +20,16 @@ const FALLBACK_A = {
 }
 
 const FALLBACK_TIMELINE = [
-  { title: '正式认领', description: '您已成为这坛酒的守护人', happened_at: new Date(Date.now() - 2 * 86400000).toISOString() },
-  { title: '入窖陈酿', description: '酒坛搬入古窖，开启慢呼吸的旅程', happened_at: new Date(Date.now() - 86400000).toISOString() },
-  { title: '开坛品鉴', description: '静候成熟。', happened_at: new Date(Date.now() + 365 * 86400000).toISOString() }
+  { title: '正式认领', description: '您已成为这坛酒的守护人，时光由此开始丈量。', happened_at: new Date(Date.now() - 2 * 86400000).toISOString() },
+  { title: '入窖陈酿', description: '酒坛搬入古窖，开启慢呼吸的旅程，微生物悄然欢歌。', happened_at: new Date(Date.now() - 86400000).toISOString() },
+  { title: '开坛品鉴', description: '静候成熟，一切美好都值得等待。', happened_at: new Date(Date.now() + 365 * 86400000).toISOString() }
+]
+
+const FALLBACK_COMPONENTS = [
+  { name: '氨基酸', description: '黄酒含有 18 种氨基酸，其中 8 种是人体必需氨基酸' },
+  { name: '多酚类', description: '抗氧化活性物质，有助于延缓衰老' },
+  { name: '低聚糖', description: '促进肠道益生菌繁殖，改善消化' },
+  { name: '麦角甾醇', description: '红曲特有，可调节胆固醇代谢' }
 ]
 
 // 工序 emoji 映射(后端返回 name,前端拼 emoji)
@@ -145,6 +152,7 @@ Page({
       ])
       const components = await api.components().catch(() => [])
       const m = metrics || this.fallbackMetrics()
+      const { img, jarState } = this.resolveJarState(m)
 
       this.setData({
         state: 'claimed',
@@ -156,7 +164,8 @@ Page({
         },
         agingDays: 128,
         metrics: m,
-        jarStateImg: this.jarStateImg(m),
+        jarStateImg: img,
+        jarState,
         timeline: this.formatTimeline(timeline),
         components: this.formatComponents(components)
       })
@@ -165,13 +174,18 @@ Page({
     }
   },
 
-  // 根据指标推断酒坛状态图片
-  jarStateImg(metrics) {
-    if (!metrics) return '/images/jar-states/state-normal.png'
-    if (metrics.ph_status === '偏高') return '/images/jar-states/state-acid.png'
+  // 根据指标推断酒坛状态,返回 {img, jarState}
+  resolveJarState(metrics) {
+    if (!metrics) return { img: '/images/jar-states/state-normal.png', jarState: 'normal' }
+    if (metrics.ph_status === '偏高') return { img: '/images/jar-states/state-acid.png', jarState: 'acid' }
     const bs = metrics.breathing_state || ''
-    if (bs.includes('沉睡') || bs.includes('休眠')) return '/images/jar-states/state-sleep.png'
-    return '/images/jar-states/state-normal.png'
+    if (bs.includes('沉睡') || bs.includes('休眠')) return { img: '/images/jar-states/state-sleep.png', jarState: 'sleep' }
+    return { img: '/images/jar-states/state-normal.png', jarState: 'normal' }
+  },
+
+  // 兼容旧调用
+  jarStateImg(metrics) {
+    return this.resolveJarState(metrics).img
   },
 
   // 接 dashboard 返回的 claimed 数据
@@ -180,6 +194,7 @@ Page({
     const cellar = d.cellar || {}
     const series = d.series || {}
     const metrics = d.metrics || this.fallbackMetrics()
+    const { img, jarState } = this.resolveJarState(metrics)
 
     this.setData({
       state: 'claimed',
@@ -191,7 +206,8 @@ Page({
       },
       agingDays: d.aging_days || 0,
       metrics,
-      jarStateImg: this.jarStateImg(metrics),
+      jarStateImg: img,
+      jarState,
       timeline: this.formatTimeline(d.timelines || []),
       components: this.formatComponents(d.components || [])
     })
@@ -242,8 +258,8 @@ Page({
   },
 
   formatComponents(list) {
-    if (!Array.isArray(list)) return []
-    return list.map(c => ({
+    const src = (Array.isArray(list) && list.length) ? list : FALLBACK_COMPONENTS
+    return src.map(c => ({
       name: c.name,
       desc: c.description || '',
       emoji: COMP_EMOJI_BY_NAME[c.name] || '🟢'
@@ -272,7 +288,7 @@ Page({
       out_cellar_temp: 24,
       out_cellar_humidity: 65,
       breathing_state: '风味沉淀中',
-      ai_narrative: '当前"红曲之灵"正处于舒适的慢呼吸状态。'
+      ai_narrative: '窖内温湿均衡，PH 值维持在 4.52 的绝佳状态。适宜的气候正加速红曲与精米的美妙融合，酒液正在静溢中酝酿深邃香气。'
     }
   },
 
