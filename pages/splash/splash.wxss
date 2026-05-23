@@ -1,97 +1,94 @@
 .splash-page {
-  position: relative;
   min-height: 100vh;
-  background: linear-gradient(180deg, #F5F1E8 0%, #E8DCC0 100%);
+  background: #F5EFE0;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  overflow: hidden;
+  padding: 0 40rpx 60rpx;
 }
 
-.skip {
-  position: absolute;
-  top: 110rpx;
-  right: 40rpx;
-  padding: 10rpx 26rpx;
-  font-size: 24rpx;
-  color: #6B5A4A;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 30rpx;
-  z-index: 10;
-}
-
-.content {
-  flex: 1;
+/* 品牌区 */
+.brand-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding-bottom: 120rpx;
+  padding-top: 80rpx;
+  margin-bottom: 40rpx;
 }
-
-.brand-mark {
-  font-size: 200rpx;
-  font-weight: 200;
-  color: rgba(160, 40, 40, 0.08);
-  letter-spacing: 30rpx;
-  margin-bottom: -120rpx;
-  line-height: 1;
-  user-select: none;
-}
-
 .main-title {
-  font-size: 100rpx;
+  font-size: 96rpx;
   font-weight: 700;
   color: #8C2424;
   letter-spacing: 16rpx;
-  text-shadow: 0 4rpx 16rpx rgba(140, 36, 36, 0.15);
 }
-
 .sub-title {
-  margin-top: 24rpx;
-  font-size: 32rpx;
-  color: #6B5A4A;
-  letter-spacing: 8rpx;
-}
-
-.tags {
-  margin-top: 60rpx;
-  display: flex;
-  align-items: center;
-  font-size: 24rpx;
+  margin-top: 16rpx;
+  font-size: 28rpx;
   color: #8B7A5A;
-  letter-spacing: 2rpx;
+  letter-spacing: 4rpx;
 }
-.tag { padding: 0 4rpx; }
-.dot { margin: 0 16rpx; color: #C4B59A; }
 
-.loader {
-  margin-top: 160rpx;
-  width: 200rpx;
-  height: 4rpx;
-  background: rgba(160, 40, 40, 0.15);
-  border-radius: 4rpx;
+/* 工序卡片 */
+.craft-card {
+  position: relative;
+  width: 100%;
+  border-radius: 24rpx;
   overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(140,100,40,0.10);
 }
-.bar {
-  height: 100%;
-  background: #A02828;
-  transition: width 0.2s linear;
+.craft-img {
+  width: 100%;
+  height: 560rpx;
+  display: block;
+}
+.craft-label {
+  position: absolute;
+  top: 24rpx;
+  left: 24rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #4A3A2A;
+  letter-spacing: 2rpx;
+  line-height: 1.6;
+  background: rgba(255,255,255,0.82);
+  padding: 8rpx 14rpx;
+  border-radius: 10rpx;
 }
 
-.hint {
-  margin-top: 30rpx;
+/* 说明文字 */
+.craft-desc {
+  margin-top: 36rpx;
+  font-size: 28rpx;
+  color: #4A3A2A;
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 1rpx;
+  padding: 0 10rpx;
+}
+
+/* 底部 */
+.splash-footer {
+  margin-top: auto;
+  padding-top: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+}
+.loading-hint {
   font-size: 24rpx;
-  color: #8B7A5A;
+  color: #A07A50;
   letter-spacing: 3rpx;
 }
-
-.footer {
-  position: absolute;
-  bottom: 60rpx;
-  font-size: 22rpx;
-  color: #B5A480;
+.skip-btn {
+  padding: 16rpx 60rpx;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #6B5A4A;
   letter-spacing: 2rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.06);
 }
+.skip-btn:active { opacity: 0.7; }
