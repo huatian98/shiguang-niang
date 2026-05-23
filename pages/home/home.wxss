@@ -474,8 +474,8 @@
 .section { margin-top: 30rpx; }
 .section-head {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12rpx;
   padding: 0 30rpx 20rpx;
 }
 .section-title {
