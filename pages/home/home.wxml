@@ -82,67 +82,70 @@
 
   <!-- ============ 状态 B:已认领 ============ -->
   <block wx:elif="{{state === 'claimed'}}">
-    <view class="page-nav">
-      <text class="page-nav-title">时光酿</text>
+    <!-- 顶部导航 -->
+    <view class="top-nav">
+      <view class="nav-icon" bindtap="onMenu">☰</view>
+      <view class="nav-brand">时光酿</view>
+      <view class="nav-icon" bindtap="onNotice">
+        <text class="bell">🔔</text>
+      </view>
     </view>
 
+    <!-- 酒坛主视觉区 -->
     <view class="hero-b">
-      <view class="ai-jar">
-        <view class="ai-jar-emoji">🍶</view>
-        <view class="ai-jar-zzz">z<text class="zzz-2">z</text><text class="zzz-3">Z</text></view>
-        <view class="ai-jar-action share">分享心情</view>
-        <view class="ai-jar-action diary">养情手账</view>
-      </view>
-
-      <view class="hero-b-tags">
-        <text class="hero-b-tag">沉味沉淀中</text>
-        <text class="hero-b-state">正在静默呼吸</text>
-      </view>
-
-      <view class="jar-title">
-        {{jar.alias}} · {{jar.code}}
-        <text class="jar-aging">已认领 {{agingDays}} 天</text>
-      </view>
-      <view class="jar-cellar">📍 {{jar.cellar_addr}} · {{jar.cellar_name}}</view>
-    </view>
-
-    <view class="metrics-card">
-      <view class="metrics-row main">
-        <view class="metric-big">
-          <text class="m-label">酸碱度</text>
-          <text class="m-num">{{metrics.wine_ph}}</text>
-          <text class="m-status {{metrics.ph_status === '稳定' ? 'ok' : 'warn'}}">{{metrics.ph_status}}</text>
-        </view>
-      </view>
-      <view class="metrics-grid">
-        <view class="m-cell">
-          <text class="m-cell-label">窖内温度</text>
-          <text class="m-cell-val">{{metrics.in_cellar_temp}}<text class="m-unit">°C</text></text>
-        </view>
-        <view class="m-cell">
-          <text class="m-cell-label">窖内湿度</text>
-          <text class="m-cell-val">{{metrics.in_cellar_humidity}}<text class="m-unit">%</text></text>
-        </view>
-        <view class="m-cell">
-          <text class="m-cell-label">窖外温度</text>
-          <text class="m-cell-val">{{metrics.out_cellar_temp}}<text class="m-unit">°C</text></text>
-        </view>
-        <view class="m-cell">
-          <text class="m-cell-label">窖外湿度</text>
-          <text class="m-cell-val">{{metrics.out_cellar_humidity}}<text class="m-unit">%</text></text>
-        </view>
+      <image class="jar-state-img" src="{{jarStateImg}}" mode="aspectFill" />
+      <view class="invite-btn" bindtap="onInvite">✦ 邀友同酿</view>
+      <view class="status-pills">
+        <text class="pill pill-orange">✦ {{metrics.breathing_state}}</text>
+        <text class="pill {{metrics.ph_status === '偏高' ? 'pill-red' : 'pill-green'}}">🛡 {{metrics.ph_status === '偏高' ? '酸度偏高关注' : '正在静默呼吸'}}</text>
       </view>
     </view>
 
+    <!-- 酒坛信息行 -->
+    <view class="jar-info-row">
+      <view class="jar-info-left">
+        <view class="jar-code-text">{{jar.series}} · {{jar.code}}</view>
+        <view class="jar-addr-text">📍 {{jar.cellar_addr}} · {{jar.cellar_name}}</view>
+      </view>
+      <view class="aging-badge">已认领 {{agingDays}} 天</view>
+    </view>
+
+    <!-- 三格指标卡 -->
+    <view class="metrics-three">
+      <view class="m3-card">
+        <view class="m3-icon">🧪</view>
+        <view class="m3-title">酸碱平衡</view>
+        <view class="m3-val {{metrics.ph_status === '偏高' ? 'm3-warn' : ''}}">{{metrics.wine_ph}}</view>
+        <view class="m3-sub {{metrics.ph_status === '偏高' ? 'm3-sub-warn' : 'm3-sub-ok'}}">状态：{{metrics.ph_status}}</view>
+      </view>
+      <view class="m3-card">
+        <view class="m3-icon">🏛</view>
+        <view class="m3-title">窖内环境</view>
+        <view class="m3-val">{{metrics.in_cellar_temp}}℃</view>
+        <view class="m3-sub m3-sub-gray">{{metrics.in_cellar_humidity}}% 湿度</view>
+      </view>
+      <view class="m3-card">
+        <view class="m3-icon">☁️</view>
+        <view class="m3-title">外部气候</view>
+        <view class="m3-val">{{metrics.out_cellar_temp}}℃</view>
+        <view class="m3-sub m3-sub-gray">{{metrics.out_cellar_humidity}}% 湿度</view>
+      </view>
+    </view>
+
+    <!-- AI 酿酒师感说卡 -->
     <view class="ai-card" bindtap="onAITap">
       <view class="ai-icon">✦</view>
       <view class="ai-content">
-        <view class="ai-title">AI 醒酒师交互卡</view>
+        <view class="ai-title">AI 酿酒师感说</view>
         <view class="ai-text">{{metrics.ai_narrative}}</view>
-        <view class="ai-tip">点击查看完整 ›</view>
+        <view class="ai-tags">
+          <text class="ai-tag ai-tag-red">🔴 口感推荐：醇厚回甘</text>
+          <text class="ai-tag ai-tag-green">🟢 发酵中：均匀呼吸泡</text>
+        </view>
       </view>
     </view>
 
+    <!-- 黄酒成长故事 -->
     <view class="section">
       <view class="section-head">
         <text class="section-title">📖 黄酒成长故事</text>
@@ -166,6 +169,7 @@
       </view>
     </view>
 
+    <!-- 黄酒成分科普 -->
     <view class="section">
       <view class="section-head">
         <text class="section-title">📚 黄酒成分科普</text>

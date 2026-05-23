@@ -56,6 +56,7 @@ Page({
     jar: null,
     agingDays: 0,
     metrics: null,
+    jarStateImg: '/images/jar-states/state-normal.png',
     timeline: [],
     components: []
   },
@@ -128,7 +129,7 @@ Page({
     }
   },
 
-  // 强制 B 状态预览(?demo=claimed):随便拉一坛 metrics 展示
+  // 强制 B 状态预览(?demo=claimed)
   async loadDashboardForceB() {
     try {
       const [legacy, metrics, timeline] = await Promise.all([
@@ -137,17 +138,19 @@ Page({
         api.jarTimeline(1).catch(() => [])
       ])
       const components = await api.components().catch(() => [])
+      const m = metrics || this.fallbackMetrics()
 
       this.setData({
         state: 'claimed',
         jar: {
           code: (legacy && legacy.code) || 'BQ-0827',
-          alias: '红曲之灵',
+          series: (legacy && legacy.series) || '惊蛰系列',
           cellar_name: (legacy && legacy.cellar) || '四平村古窖藏',
           cellar_addr: (legacy && legacy.address) || '福建省宁德市屏南县'
         },
         agingDays: 128,
-        metrics: metrics || this.fallbackMetrics(),
+        metrics: m,
+        jarStateImg: this.jarStateImg(m),
         timeline: this.formatTimeline(timeline),
         components: this.formatComponents(components)
       })
@@ -156,23 +159,33 @@ Page({
     }
   },
 
+  // 根据指标推断酒坛状态图片
+  jarStateImg(metrics) {
+    if (!metrics) return '/images/jar-states/state-normal.png'
+    if (metrics.ph_status === '偏高') return '/images/jar-states/state-acid.png'
+    const bs = metrics.breathing_state || ''
+    if (bs.includes('沉睡') || bs.includes('休眠')) return '/images/jar-states/state-sleep.png'
+    return '/images/jar-states/state-normal.png'
+  },
+
   // 接 dashboard 返回的 claimed 数据
   applyClaimedState(d) {
-    const claim = d.claim || {}
     const jar = d.jar || {}
     const cellar = d.cellar || {}
     const series = d.series || {}
+    const metrics = d.metrics || this.fallbackMetrics()
 
     this.setData({
       state: 'claimed',
       jar: {
         code: jar.code || 'BQ-0827',
-        alias: series.name ? series.name.split('·')[0] : '红曲之灵',
+        series: series.name || '惊蛰系列',
         cellar_name: cellar.name || '',
         cellar_addr: cellar.address || ''
       },
       agingDays: d.aging_days || 0,
-      metrics: d.metrics || this.fallbackMetrics(),
+      metrics,
+      jarStateImg: this.jarStateImg(metrics),
       timeline: this.formatTimeline(d.timelines || []),
       components: this.formatComponents(d.components || [])
     })
@@ -281,6 +294,10 @@ Page({
       // 兜底:网络异常时直接跳 id=1,详情页自己处理
       wx.navigateTo({ url: '/pages/jar-detail/jar-detail?id=1' })
     }
+  },
+
+  onInvite() {
+    wx.showToast({ title: '邀请功能即将上线', icon: 'none' })
   },
 
   onBack() {
