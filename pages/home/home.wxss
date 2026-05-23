@@ -520,7 +520,11 @@
 }
 .tl-dot-done  { background: #2E7A26; }
 .tl-dot-active { background: #8C2424; }
-.tl-dot-lock  { background: #C4B59A; }
+.tl-dot-lock  {
+  background: #fff;
+  border: 2rpx solid #C4B59A;
+  color: #C4B59A;
+}
 
 .tl-line {
   width: 2rpx;
@@ -533,17 +537,23 @@
 /* 时间线卡片 */
 .tl-card {
   flex: 1;
-  background: #F9F6F0;
+  background: #fff;
   border-radius: 14rpx;
   padding: 18rpx 20rpx;
   margin-bottom: 4rpx;
+  border: 1rpx solid #EDE8DE;
+}
+.tl-card-done {
+  border-left: 6rpx solid #2E7A26;
+  border-color: #EDE8DE;
 }
 .tl-card-active {
   background: #fff;
   border: 2rpx solid #A02828;
 }
 .tl-card-lock {
-  background: #F5F2EC;
+  background: #F8F5EF;
+  border-color: #EDE8DE;
   opacity: 0.7;
 }
 .tl-card-top {
@@ -558,6 +568,7 @@
   flex: 1;
   margin-right: 12rpx;
 }
+.tl-title-done   { color: #6B5A4A; font-weight: 400; }
 .tl-title-active { color: #8C2424; }
 .tl-title-lock   { color: #B5A480; font-weight: 400; }
 
@@ -581,6 +592,7 @@
   color: #6B5A4A;
   line-height: 1.6;
 }
+.tl-desc-done { color: #8B7A5A; }
 .tl-desc-lock { color: #B5A480; }
 
 /* 成分卡 */
