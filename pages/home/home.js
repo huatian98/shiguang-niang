@@ -279,9 +279,8 @@ Page({
     return 'active'
   },
 
-  formatComponents(list) {
-    const src = (Array.isArray(list) && list.length) ? list : FALLBACK_COMPONENTS
-    return src.map(c => ({
+  formatComponents() {
+    return FALLBACK_COMPONENTS.map(c => ({
       name: c.name,
       desc: c.description || '',
       emoji: COMP_EMOJI_BY_NAME[c.name] || '🟢'
