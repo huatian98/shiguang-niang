@@ -20,9 +20,9 @@ const FALLBACK_A = {
 }
 
 const FALLBACK_TIMELINE = [
-  { title: '正式认领', description: '您已成为这坛酒的守护人，时光由此开始丈量。', happened_at: new Date(Date.now() - 2 * 86400000).toISOString() },
-  { title: '入窖陈酿', description: '酒坛搬入古窖，开启慢呼吸的旅程，微生物悄然欢歌。', happened_at: new Date(Date.now() - 86400000).toISOString() },
-  { title: '开坛品鉴', description: '静候成熟，一切美好都值得等待。', happened_at: new Date(Date.now() + 365 * 86400000).toISOString() }
+  { title: '谷壳煴酒', description: '暗火堆房，谷壳缓燃，为黄酒完成最后的杀菌定型。', happened_at: new Date(Date.now() - 3 * 86400000).toISOString() },
+  { title: '陈年窖藏', description: '时间是最好的酿酒师，酒体正在醇化。', happened_at: new Date(Date.now()).toISOString() },
+  { title: '开坛品鉴', description: '静候成熟。', happened_at: new Date(Date.now() + 365 * 86400000).toISOString() }
 ]
 
 const FALLBACK_COMPONENTS = [
@@ -241,19 +241,44 @@ Page({
 
   formatTimeline(list) {
     const src = (Array.isArray(list) && list.length) ? list : FALLBACK_TIMELINE
-    return src.map(t => ({
-      title: t.title,
-      desc: t.description || '',
-      date: this.formatDate(t.happened_at),
-      status: this.timelineStatus(t)
-    }))
+    const now = Date.now()
+
+    // 先按时间排序
+    const sorted = [...src].sort((a, b) => new Date(a.happened_at) - new Date(b.happened_at))
+
+    // 分出"过去/未来"
+    const past = sorted.filter(t => new Date(t.happened_at).getTime() <= now)
+    const future = sorted.filter(t => new Date(t.happened_at).getTime() > now)
+
+    const items = [
+      ...past.map((t, i) => ({
+        title: t.title,
+        desc: t.description || '',
+        date: this.formatDate(t.happened_at),
+        // 最后一条过去项为 active，其余 done
+        status: i === past.length - 1 ? 'active' : 'done'
+      })),
+      ...future.map(t => ({
+        title: t.title,
+        desc: t.description || '',
+        date: this.formatDate(t.happened_at),
+        status: 'lock'
+      }))
+    ]
+
+    // 始终确保最后一项"开坛品鉴"存在
+    const hasJianjian = items.some(i => i.title.includes('开坛'))
+    if (!hasJianjian) {
+      items.push({ title: '开坛品鉴', desc: '静候成熟。', date: '', status: 'lock' })
+    }
+    return items
   },
 
   timelineStatus(t) {
     const happened = new Date(t.happened_at).getTime()
     const now = Date.now()
-    if (happened < now - 24 * 3600 * 1000) return 'done'
-    if (happened > now + 24 * 3600 * 1000) return 'lock'
+    if (happened < now - 12 * 3600 * 1000) return 'done'
+    if (happened > now + 12 * 3600 * 1000) return 'lock'
     return 'active'
   },
 
