@@ -1,29 +1,87 @@
 .splash-page {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: #F5EFE0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 36rpx 60rpx;
+}
+
+/* 品牌标题 */
+.brand-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100rpx;
+  margin-bottom: 48rpx;
+}
+.main-title {
+  font-size: 108rpx;
+  font-weight: 700;
+  color: #8C2424;
+  letter-spacing: 12rpx;
+  line-height: 1.1;
+}
+.sub-title {
+  margin-top: 18rpx;
+  font-size: 28rpx;
+  color: #8B7A5A;
+  letter-spacing: 6rpx;
+}
+
+/* 工序卡片 */
+.craft-card {
+  width: 100%;
+  border-radius: 24rpx;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(140,100,40,0.10);
+}
+.craft-img {
+  width: 100%;
+  height: 520rpx;
+  display: block;
+}
+
+/* 工序说明 */
+.craft-desc {
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #4A3A2A;
+  line-height: 1.9;
+  text-align: center;
+  letter-spacing: 1rpx;
+  padding: 0 10rpx;
+  min-height: 100rpx;
+}
+
+/* 底部 */
+.splash-footer {
+  margin-top: auto;
+  padding-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rpx;
+  width: 100%;
+}
+.loading-hint {
+  font-size: 24rpx;
+  color: #A07A50;
+  letter-spacing: 3rpx;
+}
+.skip-btn {
+  width: 280rpx;
+  height: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-
-.craft-img {
-  width: 100%;
-  height: 100%;
-}
-
-.skip-btn {
-  position: absolute;
-  bottom: 80rpx;
-  right: 40rpx;
-  padding: 16rpx 48rpx;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.75);
   border-radius: 50rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #6B5A4A;
-  letter-spacing: 2rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.08);
+  letter-spacing: 4rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.06);
 }
 .skip-btn:active { opacity: 0.7; }
