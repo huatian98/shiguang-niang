@@ -1,42 +1,72 @@
 <view class="profile-page" style="padding-top: {{statusBarHeight}}px;">
-  <view class="page-nav">
-    <text class="page-nav-title">我的</text>
+
+  <!-- 顶部导航 -->
+  <view class="navbar">
+    <view class="nav-left">☰</view>
+    <text class="nav-brand">时光酿</text>
+    <view class="nav-right">🔔</view>
   </view>
-  <view class="header">
-    <view class="avatar">🍶</view>
-    <view class="user-info">
-      <view class="nickname">酒友 · demo</view>
-      <view class="user-tag">尊享守护人</view>
+
+  <!-- 用户信息区 -->
+  <view class="user-section">
+    <view class="avatar-wrap">
+      <text class="avatar-text">{{avatarText}}</text>
+    </view>
+    <view class="nickname">{{nickname}}</view>
+    <view class="signature">{{signature}}</view>
+  </view>
+
+  <!-- 数据统计行 -->
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-num">{{claimDays}}</text>
+      <text class="stat-label">认领天数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <view class="medal-icon">★</view>
+      <text class="stat-label">匠心勋章</text>
     </view>
   </view>
 
-  <view class="card">
-    <view class="card-row" bindtap="onComing">
-      <text class="row-icon">📜</text>
-      <text class="row-label">我的电子证书</text>
+  <!-- 我的酿造坊 -->
+  <view class="section-title">我的酿造坊</view>
+  <view class="brew-card">
+    <view class="brew-row" bindtap="onMyClaims">
+      <view class="brew-icon red-bg">🍷</view>
+      <view class="brew-text">
+        <view class="brew-name">我的认领</view>
+        <view class="brew-sub">当前认领 {{claimCount}} 坛红曲酒</view>
+      </view>
       <text class="row-arrow">›</text>
     </view>
-    <view class="card-row" bindtap="onComing">
-      <text class="row-icon">🎁</text>
-      <text class="row-label">兑换记录</text>
-      <text class="row-arrow">›</text>
-    </view>
-    <view class="card-row" bindtap="onComing">
-      <text class="row-icon">📍</text>
-      <text class="row-label">收货地址</text>
-      <text class="row-arrow">›</text>
-    </view>
-    <view class="card-row" bindtap="onComing">
-      <text class="row-icon">🛎</text>
-      <text class="row-label">消息通知</text>
-      <text class="row-arrow">›</text>
-    </view>
-    <view class="card-row" bindtap="onComing">
-      <text class="row-icon">💬</text>
-      <text class="row-label">联系客服</text>
+    <view class="brew-divider"></view>
+    <view class="brew-row" bindtap="onMyActivities">
+      <view class="brew-icon beige-bg">📅</view>
+      <view class="brew-text">
+        <view class="brew-name">活动报名记录</view>
+        <view class="brew-sub">近 30 天参与 {{activityCount}} 场线下活动</view>
+      </view>
       <text class="row-arrow">›</text>
     </view>
   </view>
 
-  <view class="version">v0.1.0 · MVP 演示版</view>
+  <!-- 通用功能 -->
+  <view class="func-card">
+    <view class="func-row" bindtap="onSettings">
+      <text class="func-icon">⚙️</text>
+      <text class="func-label">设置</text>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="brew-divider"></view>
+    <view class="func-row" bindtap="onService">
+      <text class="func-icon">❓</text>
+      <text class="func-label">联系客服</text>
+      <text class="row-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 底部引言 -->
+  <view class="quote">"漫长岁月 唯酒不语"</view>
+
 </view>
