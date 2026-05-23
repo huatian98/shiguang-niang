@@ -1,6 +1,11 @@
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .splash-page {
   min-height: 100vh;
-  background: #F5EFE0;
+  background: #FCF8F2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,39 +18,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100rpx;
-  margin-bottom: 48rpx;
+  padding-top: 80rpx;
+  margin-bottom: 180rpx;
+  animation: fadeSlideIn 1.2s ease-out both;
+  animation-delay: 0.2s;
 }
 .main-title {
   font-size: 108rpx;
   font-weight: 700;
-  color: #8C2424;
+  color: #943029;
   letter-spacing: 12rpx;
   line-height: 1.1;
 }
 .sub-title {
   margin-top: 18rpx;
   font-size: 28rpx;
-  color: #8B7A5A;
+  color: #897170;
   letter-spacing: 6rpx;
 }
 
 /* swiper */
 .craft-swiper {
-  width: 100%;
+  width: 560rpx;
   height: 520rpx;
-  border-radius: 24rpx;
+  border-radius: 32rpx;
   overflow: hidden;
+  animation: fadeSlideIn 1.2s ease-out both;
+  animation-delay: 0.6s;
 }
 
 /* 卡片 */
 .craft-card {
   width: 100%;
   height: 100%;
-  border-radius: 24rpx;
+  border-radius: 32rpx;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 8rpx 30rpx rgba(140,100,40,0.10);
+  box-shadow: 0 8rpx 32rpx rgba(148,48,41,0.10), 0 2rpx 8rpx rgba(0,0,0,0.06);
 }
 .craft-img {
   width: 100%;
@@ -57,7 +66,7 @@
 .craft-desc {
   margin-top: 40rpx;
   font-size: 28rpx;
-  color: #4A3A2A;
+  color: #564241;
   line-height: 1.9;
   text-align: center;
   letter-spacing: 1rpx;
@@ -67,30 +76,34 @@
 
 /* 底部 */
 .splash-footer {
-  margin-top: auto;
-  padding-top: 40rpx;
+  margin-top: 48rpx;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24rpx;
   width: 100%;
+  animation: fadeSlideIn 1.2s ease-out both;
+  animation-delay: 1s;
 }
 .loading-hint {
   font-size: 24rpx;
-  color: #A07A50;
+  color: #897170;
   letter-spacing: 3rpx;
+  font-style: italic;
 }
 .skip-btn {
-  width: 280rpx;
-  height: 80rpx;
+  width: 240rpx;
+  height: 72rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.75);
+  gap: 8rpx;
+  background: transparent;
+  border: 1rpx solid rgba(137,113,112,0.4);
   border-radius: 50rpx;
-  font-size: 30rpx;
-  color: #6B5A4A;
+  font-size: 28rpx;
+  color: #897170;
   letter-spacing: 4rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.06);
 }
-.skip-btn:active { opacity: 0.7; }
+.skip-btn:active { opacity: 0.6; }
