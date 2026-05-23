@@ -1,70 +1,94 @@
 <view class="list-page" style="padding-top: {{statusBarHeight}}px;">
-  <view class="page-nav">
-    <text class="page-nav-title">时光酿</text>
+
+  <!-- 顶部导航 -->
+  <view class="navbar">
+    <view class="nav-menu">☰</view>
+    <text class="nav-brand">时光酿</text>
+    <view class="nav-avatar">
+      <text class="avatar-text">{{avatarText}}</text>
+    </view>
   </view>
+
+  <!-- 标题区 -->
   <view class="header">
     <view class="title-row">
       <text class="title">认领列表</text>
-      <text class="count">共认领 {{totalCount}} 坛</text>
+      <view class="count-badge">共认领 {{totalCount}} 坛</view>
     </view>
-    <view class="tagline">岁月沉淀,静待花开</view>
+    <view class="tagline">岁月沉淀，静静花开。每一坛老酒都承载着时光的守候。</view>
   </view>
 
-  <view class="notice" wx:if="{{showNoticeBar}}">
-    <text class="notice-icon">ⓘ</text>
-    <text class="notice-text">您有一条新认领正在处理,敬请期待</text>
+  <!-- 通知条 -->
+  <view class="notice-bar" wx:if="{{showNoticeBar}}">
+    <text class="notice-icon">📅</text>
+    <text class="notice-text">您有一条新的认领正在处理中…</text>
     <text class="notice-close" bindtap="onCloseNotice">✕</text>
   </view>
 
+  <!-- 认领列表 -->
   <view class="claim-list">
-    <view class="empty" wx:if="{{!claims.length}}">
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!claims.length && !loading}}">
       <view class="empty-emoji">🍶</view>
       <view class="empty-title">还没有认领的酒坛</view>
-      <view class="empty-sub">点击下方按钮,认领你的第一坛时光</view>
+      <view class="empty-sub">点击下方按钮，认领你的第一坛时光</view>
     </view>
-    <view class="claim-card {{item.status}}" wx:for="{{claims}}" wx:key="id">
-      <view class="card-top">
-        <view class="code-block">
-          <view class="dot {{item.status}}"></view>
+
+    <!-- 卡片列表 -->
+    <view class="claim-card" wx:for="{{claims}}" wx:key="id">
+      <!-- 左侧信息区 -->
+      <view class="card-left">
+
+        <!-- 编号行：状态指示 + 编号 + 首页徽章 -->
+        <view class="code-row">
+          <text wx:if="{{item.status !== 'ready'}}" class="dot {{item.status}}"></text>
+          <text wx:else class="ready-sym">⊘</text>
           <text class="code">{{item.code}}</text>
-          <text wx:if="{{item.is_default}}" class="default-badge">首页展示</text>
+          <text wx:if="{{item.is_default}}" class="default-badge">首页</text>
         </view>
-        <text class="status-text {{item.status}}">{{item.status_text}}</text>
+
+        <!-- 系列 + 状态文字 -->
+        <view class="meta-row">
+          <text class="series-text">{{item.series}}</text>
+          <text class="status-pill {{item.status}}">{{item.status_text}}</text>
+        </view>
+
+        <!-- 陈酿天数 -->
+        <view class="aging-row">
+          <text class="aging-label">已陈酿</text>
+          <text class="aging-num">{{item.aging_days}}</text>
+          <text class="aging-unit"> 天</text>
+        </view>
+
+        <!-- 按钮行 -->
+        <view class="btn-row">
+          <!-- 左按钮：已设为首页(首页展示中) 或 设为首页 -->
+          <view wx:if="{{item.is_default}}" class="card-btn filled-dim">已设为首页</view>
+          <view wx:else class="card-btn outline" data-id="{{item.id}}" bindtap="onSetDefault">设为首页</view>
+
+          <!-- 右按钮：申请开坛(待开启) 或 查看详情 -->
+          <view wx:if="{{item.status === 'ready'}}"
+                class="card-btn filled-red"
+                data-id="{{item.id}}"
+                data-code="{{item.code}}"
+                bindtap="onOpenJar">🔥 申请开坛</view>
+          <view wx:else class="card-btn text-red" data-id="{{item.id}}" bindtap="onViewDetail">查看详情→</view>
+        </view>
       </view>
 
-      <view class="card-mid">
-        <view class="meta-row">
-          <text class="meta-label">系列</text>
-          <text class="meta-value">{{item.series}}</text>
-        </view>
-        <view class="meta-row">
-          <text class="meta-label">酒窖</text>
-          <text class="meta-value">{{item.cellar}}</text>
-        </view>
-        <view class="meta-row">
-          <text class="meta-label">陈酿</text>
-          <text class="meta-value highlight">{{item.aging_days}} 天</text>
-        </view>
-      </view>
-
-      <view class="card-bot">
-        <view class="card-btn"
-          wx:if="{{!item.is_default}}"
-          data-id="{{item.id}}"
-          bindtap="onSetDefault">
-          设为首页
-        </view>
-        <view class="card-btn primary"
-          data-id="{{item.id}}"
-          bindtap="onViewDetail">
-          查看详情 ›
-        </view>
+      <!-- 右侧酒坛图 -->
+      <view class="card-right">
+        <image class="jar-thumb" src="/images/jars/jar-{{item.jarId}}.png" mode="aspectFit" />
       </view>
     </view>
+
   </view>
 
+  <!-- 底部 -->
   <view class="footer">
-    <view class="footer-text">✨ 续写您的时光故事</view>
-    <button class="claim-btn" bindtap="onClaimNew">+ 认领新酒</button>
+    <view class="footer-deco">✦✦ 续写您的时光故事</view>
+    <button class="new-claim-btn" bindtap="onClaimNew">认领新酒</button>
   </view>
+
 </view>

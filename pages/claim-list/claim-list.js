@@ -1,16 +1,14 @@
 const app = getApp()
 const api = require('../../utils/api')
 
-// 兜底状态映射(只用在 pending/cancelled/refunded 等非陈酿态)
 const STATUS_MAP = {
   pending:   { code: 'sleeping', text: '待支付' },
   cancelled: { code: 'sleeping', text: '已取消' },
   refunded:  { code: 'sleeping', text: '已退款' }
 }
 
-// 按陈酿天数推断业务状态:支付完进入"入窖准备中",再演进
 function deriveAgingStatus(days, rawStatus) {
-  if (rawStatus === 'completed') return { code: 'ready', text: '已开坛' }
+  if (rawStatus === 'completed') return { code: 'ready', text: '待开启' }
   if (days < 7)   return { code: 'active',   text: '入窖准备中' }
   if (days < 30)  return { code: 'active',   text: '初醒发酵中' }
   if (days < 90)  return { code: 'active',   text: '活跃发酵中' }
@@ -24,9 +22,10 @@ Page({
     statusBarHeight: 20,
     claims: [],
     totalCount: 0,
-    showNoticeBar: true,
+    showNoticeBar: false,
     loading: false,
-    defaultClaimId: 0
+    defaultClaimId: 0,
+    avatarText: '酒'
   },
 
   onLoad() {
@@ -36,6 +35,11 @@ Page({
 
   onShow() {
     this.loadClaims()
+    // 更新头像文字
+    const userInfo = app.globalData.userInfo
+    if (userInfo && userInfo.nickname) {
+      this.setData({ avatarText: userInfo.nickname.slice(0, 1) })
+    }
   },
 
   async tryEnsureLogin() {
@@ -57,52 +61,52 @@ Page({
     this.setData({ loading: true })
 
     try {
-      // 顺手获取一下当前用户默认 claim,用来打 "首页展示" 徽章
       let defaultClaimId = 0
+      let hasProcessing = false
       try {
         const dashboard = await api.homeDashboard()
         if (dashboard && dashboard.claim) defaultClaimId = dashboard.claim.id
+        if (dashboard && dashboard.state === 'processing') hasProcessing = true
       } catch (_) {}
 
       const list = await api.claimList()
       const claims = (Array.isArray(list) ? list : []).map(c => {
         const days = this.calcDays(c.paid_at || c.created_at)
-        // pending/cancelled/refunded 走兜底,其他按陈酿天数推断
         const stm = STATUS_MAP[c.status] || deriveAgingStatus(days, c.status)
         return {
           id: c.id,
+          jarId: this.jarIdThumb(c.jar_id),
           code: this.codeFromJar(c.jar_id),
           series: '十摊系列',
-          cellar: this.cellarFromId(c.cellar_id),
           aging_days: days,
           status: stm.code,
           status_text: stm.text,
           is_default: defaultClaimId === c.id
         }
       })
+
       this.setData({
         claims,
         totalCount: claims.length,
-        defaultClaimId
+        defaultClaimId,
+        showNoticeBar: hasProcessing
       })
     } catch (e) {
       console.error('loadClaims fail', e)
-      // 没认领单时显示空状态
       this.setData({ claims: [], totalCount: 0 })
     } finally {
       this.setData({ loading: false })
     }
   },
 
-  // 后端 claims 接口只返回 jar_id 数字,映射成酒坛编号
   codeFromJar(jarId) {
     const map = { 1: 'BQ-0827', 2: 'BQ-0901', 3: 'BQ-1024' }
     return map[jarId] || `BQ-${String(jarId).padStart(4, '0')}`
   },
 
-  cellarFromId(cellarId) {
-    const map = { 1: '四平村古窖藏', 2: '云岭古窖', 3: '终南山藏' }
-    return map[cellarId] || '酒窖'
+  // 酒坛缩略图 ID，映射到 1~3 循环
+  jarIdThumb(jarId) {
+    return ((Number(jarId) - 1) % 3) + 1
   },
 
   calcDays(isoStr) {
@@ -125,12 +129,40 @@ Page({
     }
   },
 
-  onViewDetail() {
-    wx.switchTab({ url: '/pages/home/home' })
+  onViewDetail(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${id}&mode=view` })
   },
 
-  onClaimNew() {
-    wx.navigateTo({ url: '/pages/jar-list/jar-list' })
+  onOpenJar(e) {
+    const code = e.currentTarget.dataset.code
+    wx.showModal({
+      title: '申请开坛',
+      content: `确认申请开坛 ${code}？开坛后将安排师傅现场开封，不可撤回。`,
+      confirmText: '确认申请',
+      cancelText: '再等等',
+      confirmColor: '#A02828',
+      success: (res) => {
+        if (res.confirm) {
+          wx.showToast({ title: '申请已提交', icon: 'success', duration: 1500 })
+        }
+      }
+    })
+  },
+
+  async onClaimNew() {
+    try {
+      const list = await api.jarsAvailable(50)
+      const jars = Array.isArray(list) ? list : (list && list.jars) || []
+      if (!jars.length) {
+        wx.showToast({ title: '暂无可认领酒坛', icon: 'none' })
+        return
+      }
+      const picked = jars[Math.floor(Math.random() * jars.length)]
+      wx.navigateTo({ url: `/pages/jar-detail/jar-detail?id=${picked.id}` })
+    } catch (e) {
+      wx.showToast({ title: '加载失败，请重试', icon: 'none' })
+    }
   },
 
   onCloseNotice() {
