@@ -174,9 +174,19 @@ Page({
   // 根据指标推断酒坛状态,返回 {img, jarState}
   resolveJarState(metrics) {
     if (!metrics) return { img: '/images/jar-states/state-normal.png', jarState: 'normal' }
-    if (metrics.ph_status === '偏高') return { img: '/images/jar-states/state-acid.png', jarState: 'acid' }
-    const bs = metrics.breathing_state || ''
-    if (bs.includes('沉睡') || bs.includes('休眠')) return { img: '/images/jar-states/state-sleep.png', jarState: 'sleep' }
+
+    const ph   = Number(metrics.wine_ph)
+    const temp = Number(metrics.in_cellar_temp)
+    const hum  = Number(metrics.in_cellar_humidity)
+
+    // 过酸：pH ≤ 4
+    if (!isNaN(ph) && ph <= 4) {
+      return { img: '/images/jar-states/state-acid.png', jarState: 'acid' }
+    }
+    // 温湿适宜：温度 10~20°C 且 湿度 60~70%
+    if (!isNaN(temp) && !isNaN(hum) && temp >= 10 && temp <= 20 && hum >= 60 && hum <= 70) {
+      return { img: '/images/jar-states/state-sleep.png', jarState: 'sleep' }
+    }
     return { img: '/images/jar-states/state-normal.png', jarState: 'normal' }
   },
 
@@ -305,7 +315,7 @@ Page({
       wine_ph: 4.52,
       ph_status: '稳定',
       in_cellar_temp: 18.5,
-      in_cellar_humidity: 78,
+      in_cellar_humidity: 65,
       out_cellar_temp: 24,
       out_cellar_humidity: 65,
       breathing_state: '风味沉淀中',
