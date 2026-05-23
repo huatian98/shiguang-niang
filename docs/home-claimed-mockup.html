@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>时光酿 · 首页已认领状态 交互图</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E8E0D0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.state-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #4A3A2A;
+  letter-spacing: 2px;
+  background: #fff;
+  padding: 6px 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 手机外壳 */
+.phone {
+  width: 320px;
+  background: #F5F1E8;
+  border-radius: 40px;
+  border: 8px solid #2A2A2A;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+  overflow: hidden;
+  position: relative;
+}
+/* 刘海 */
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100px; height: 26px;
+  background: #2A2A2A;
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+
+/* 顶部导航 */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 36px 16px 8px;
+  background: #F5F1E8;
+}
+.nav-icon { font-size: 20px; color: #8B7A5A; width: 28px; }
+.nav-brand { flex: 1; text-align: center; font-size: 17px; font-weight: 700; color: #A02828; letter-spacing: 4px; }
+
+/* 酒坛主视觉 */
+.jar-hero {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+.jar-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* 邀友按钮 */
+.invite-btn {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: rgba(255,248,230,0.92);
+  color: #8B5A20;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 16px;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+/* 底部状态标签 */
+.status-pills {
+  position: absolute;
+  bottom: 14px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+.pill {
+  padding: 5px 14px;
+  border-radius: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.pill-orange { background: rgba(255,220,150,0.92); color: #8B4A10; }
+.pill-green  { background: rgba(200,240,200,0.92); color: #2A6A2A; }
+.pill-red    { background: rgba(255,200,200,0.92); color: #A02828; }
+.pill-gray   { background: rgba(220,215,205,0.92); color: #5A5050; }
+
+/* 酒坛信息行 */
+.jar-info {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px 6px;
+}
+.jar-info-left { flex: 1; }
+.jar-code {
+  font-size: 16px; font-weight: 700; color: #8C2424; letter-spacing: 1px;
+}
+.jar-address {
+  font-size: 10px; color: #8B7A5A; margin-top: 3px; letter-spacing: 0.5px;
+}
+.aging-badge {
+  background: #A02828; color: #fff;
+  font-size: 10px; font-weight: 600;
+  padding: 4px 12px; border-radius: 14px;
+  white-space: nowrap; letter-spacing: 0.5px;
+}
+
+/* 三格指标 */
+.metrics {
+  display: flex;
+  margin: 6px 12px;
+  gap: 6px;
+}
+.metric-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 6px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.m-icon { font-size: 16px; margin-bottom: 2px; }
+.m-title { font-size: 9px; color: #8B7A5A; letter-spacing: 0.5px; margin-bottom: 3px; }
+.m-val { font-size: 15px; font-weight: 700; color: #8C2424; line-height: 1; }
+.m-sub { font-size: 9px; margin-top: 3px; }
+.sub-green { color: #2E7A26; }
+.sub-gray  { color: #8B7A5A; }
+
+/* AI 感说卡 */
+.ai-card {
+  margin: 6px 12px 10px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid #A02828;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.ai-title {
+  font-size: 10px; font-weight: 700; color: #A02828;
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.ai-text {
+  font-size: 10px; color: #4A3A2A; line-height: 1.7; letter-spacing: 0.3px;
+}
+.ai-tags {
+  display: flex; gap: 6px; margin-top: 8px;
+}
+.ai-tag {
+  font-size: 9px; padding: 3px 10px; border-radius: 10px;
+}
+.ai-tag-red   { background: rgba(160,40,40,0.1); color: #A02828; }
+.ai-tag-green { background: rgba(46,122,38,0.1); color: #2E7A26; }
+</style>
+</head>
+<body>
+
+<!-- ===== 状态1：温湿度适宜 · 正常微笑 ===== -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="navbar">
+      <span class="nav-icon">☰</span>
+      <span class="nav-brand">时光酿</span>
+      <span class="nav-icon" style="text-align:right">🔔</span>
+    </div>
+
+    <div class="jar-hero">
+      <img class="jar-bg" src="../images/jar-states/state-normal.png" />
+      <div class="invite-btn">✦ 邀友同酿</div>
+      <div class="status-pills">
+        <span class="pill pill-orange">✦ 风味沉淀中</span>
+        <span class="pill pill-green">🛡 正在静默呼吸</span>
+      </div>
+    </div>
+
+    <div class="jar-info">
+      <div class="jar-info-left">
+        <div class="jar-code">惊蛰系列 · BQ-0827</div>
+        <div class="jar-address">📍 福建省屏南县 · 四坪封窖藏</div>
+      </div>
+      <div class="aging-badge">已认领 182 天</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="m-icon">🧪</div>
+        <div class="m-title">酸碱平衡</div>
+        <div class="m-val">4.52</div>
+        <div class="m-sub sub-green">状态：稳定</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">🏛</div>
+        <div class="m-title">窖内环境</div>
+        <div class="m-val">18.5℃</div>
+        <div class="m-sub sub-gray">78% 湿度</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">☁️</div>
+        <div class="m-title">外部气候</div>
+        <div class="m-val">24.0℃</div>
+        <div class="m-sub sub-gray">65% 湿度</div>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-title">✦ AI 酿酒师感说</div>
+      <div class="ai-text">窖内温湿均衡，PH 值维持在 4.52 的绝佳状态。适宜的气候正加速红曲与精米的美妙融合，酒液正在静溢中酝酿深邃香气。</div>
+      <div class="ai-tags">
+        <span class="ai-tag ai-tag-red">🔴 口感推荐：醇厚回甘</span>
+        <span class="ai-tag ai-tag-green">🟢 发酵中：均匀呼吸泡</span>
+      </div>
+    </div>
+  </div>
+  <div class="state-label">🟢 状态一：温湿度适宜</div>
+</div>
+
+<!-- ===== 状态2：酸度升高 · 难受哭泣 ===== -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="navbar">
+      <span class="nav-icon">☰</span>
+      <span class="nav-brand">时光酿</span>
+      <span class="nav-icon" style="text-align:right">🔔</span>
+    </div>
+
+    <div class="jar-hero">
+      <img class="jar-bg" src="../images/jar-states/state-acid.png" />
+      <div class="invite-btn">✦ 邀友同酿</div>
+      <div class="status-pills">
+        <span class="pill pill-red">⚠️ 酸度升高</span>
+        <span class="pill pill-gray">褪去一抹青涩</span>
+      </div>
+    </div>
+
+    <div class="jar-info">
+      <div class="jar-info-left">
+        <div class="jar-code">惊蛰系列 · BQ-0827</div>
+        <div class="jar-address">📍 福建省屏南县 · 四坪封窖藏</div>
+      </div>
+      <div class="aging-badge">已认领 182 天</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="m-icon">🧪</div>
+        <div class="m-title">酸碱平衡</div>
+        <div class="m-val" style="color:#C85A20">5.18</div>
+        <div class="m-sub" style="color:#C85A20">状态：偏高</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">🏛</div>
+        <div class="m-title">窖内环境</div>
+        <div class="m-val">19.2℃</div>
+        <div class="m-sub sub-gray">82% 湿度</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">☁️</div>
+        <div class="m-title">外部气候</div>
+        <div class="m-val">26.5℃</div>
+        <div class="m-sub sub-gray">70% 湿度</div>
+      </div>
+    </div>
+
+    <div class="ai-card" style="border-left-color:#C85A20">
+      <div class="ai-title" style="color:#C85A20">⚠️ AI 酿酒师感说</div>
+      <div class="ai-text">今日酸度略有升高，PH 值达 5.18，酒液正经历一次自然的青涩蜕变。无需担忧，这是红曲老酒必经的成长阵痛，静待其自然回落即可。</div>
+      <div class="ai-tags">
+        <span class="ai-tag" style="background:rgba(200,90,32,0.1);color:#C85A20">🟠 酸度：偏高关注</span>
+        <span class="ai-tag ai-tag-green">🟢 趋势：自然回落中</span>
+      </div>
+    </div>
+  </div>
+  <div class="state-label">🔴 状态二：酸度升高</div>
+</div>
+
+<!-- ===== 状态3：安心沉睡中 ===== -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="navbar">
+      <span class="nav-icon">☰</span>
+      <span class="nav-brand">时光酿</span>
+      <span class="nav-icon" style="text-align:right">🔔</span>
+    </div>
+
+    <div class="jar-hero">
+      <img class="jar-bg" src="../images/jar-states/state-sleep.png" />
+      <div class="invite-btn">✦ 邀友同酿</div>
+      <div class="status-pills">
+        <span class="pill pill-orange">✦ 安心沉睡中</span>
+        <span class="pill pill-gray">💤 深度休眠期</span>
+      </div>
+    </div>
+
+    <div class="jar-info">
+      <div class="jar-info-left">
+        <div class="jar-code">惊蛰系列 · BQ-0827</div>
+        <div class="jar-address">📍 福建省屏南县 · 四坪封窖藏</div>
+      </div>
+      <div class="aging-badge">已认领 365 天</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="m-icon">🧪</div>
+        <div class="m-title">酸碱平衡</div>
+        <div class="m-val">4.20</div>
+        <div class="m-sub sub-green">状态：稳定</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">🏛</div>
+        <div class="m-title">窖内环境</div>
+        <div class="m-val">16.8℃</div>
+        <div class="m-sub sub-gray">74% 湿度</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-icon">☁️</div>
+        <div class="m-title">外部气候</div>
+        <div class="m-val">8.5℃</div>
+        <div class="m-sub sub-gray">58% 湿度</div>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-title">✦ AI 酿酒师感说</div>
+      <div class="ai-text">冬日低温为老酒披上了最温柔的慢养外衣。窖内静谧如初，酒液正进入深度沉睡，所有的香气分子都在悄悄重组，等待一个开坛的好时节。</div>
+      <div class="ai-tags">
+        <span class="ai-tag ai-tag-red">🔴 口感推荐：绵柔清冽</span>
+        <span class="ai-tag" style="background:rgba(100,120,180,0.1);color:#4A5A9A">💤 状态：深度沉眠</span>
+      </div>
+    </div>
+  </div>
+  <div class="state-label">💤 状态三：安心沉睡中</div>
+</div>
+
+</body>
+</html>
