@@ -4,8 +4,8 @@ const api = require('../../utils/api')
 Page({
   data: {
     statusBarHeight: 20,
-    avatarText: '酿',
-    nickname: '酿酒人',
+    avatarText: '可',
+    nickname: '可乐',
     signature: '始于闽东 归于自然',
     claimDays: 0,
     claimCount: 0,
